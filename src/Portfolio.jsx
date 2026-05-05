@@ -992,10 +992,6 @@ function ContactSection() {
     if (!form.name || !form.email || !form.message) return;
     setLoading(true);
 
-    emailjs.init({
-        publicKey: 'rmvDbJQm6p7_1Z3-K'     
-    })
-
     emailjs.send(
       "service_3eiehja",
       "template_cyjeja4",
@@ -1142,7 +1138,7 @@ export default function Portfolio() {
     document.head.appendChild(link);
 
     /* Initialize EmailJS */
-    emailjs.init("YOUR_PUBLIC_KEY_HERE");
+    emailjs.init("rmvDbJQm6p7_1Z3-K");
 
     /* Track active section */
     const handler = () => {
