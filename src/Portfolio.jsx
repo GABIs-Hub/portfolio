@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
@@ -8,12 +9,16 @@ const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact
 
 const SKILLS = [
   { name: "Flutter", level: 75, category: "Mobile" },
-  { name: "React Native", level: 60, category: "Mobile" },
+  { name: "React Native", level: 40, category: "Mobile" },
+  { name: "Swift", level: 35, category: "Mobile" },
   { name: "Kotlin / Jetpack Compose", level: 65, category: "Mobile" },
   { name: "React", level: 80, category: "Web" },
   { name: "TypeScript", level: 75, category: "Web" },
   { name: "Tailwind CSS", level: 85, category: "Web" },
   { name: "Firebase", level: 70, category: "Backend" },
+  { name: "Supabase", level: 60, category: "Backend" },
+  { name: "Neon", level: 5, category: "Backend" },
+  { name: "Node.js", level: 65, category: "Backend" },
   { name: "Git / GitHub", level: 82, category: "Tools" },
 ];
 
@@ -33,15 +38,6 @@ const PROJECTS = [
     tags: ["Flutter", "Mobile", "Finance"],
     accent: "#8b5cf6",
     icon: "◈",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "NACOS DU Resource System",
-    desc: "Admin dashboard for the NACOS DU student organisation. Features stat cards, sidebar navigation, and a filterable pending approvals table — built with React, TypeScript, and Vite.",
-    tags: ["React", "TypeScript", "Tailwind", "Vite"],
-    accent: "#10b981",
-    icon: "◉",
     github: "#",
     live: "#",
   },
@@ -73,9 +69,9 @@ const EXPERIENCE = [
   },
   {
     period: "2023 – Present",
-    role: "Computer Science Student",
+    role: "Software Engineering Student",
     org: "University",
-    desc: "Studying CS fundamentals while shipping real-world projects in parallel. Coursework spans data structures, programming principles, and system design.",
+    desc: "Studying SE fundamentals while shipping real-world projects in parallel. Coursework spans data structures, programming principles, system design, and software architecture.",
     accent: "#10b981",
   },
 ];
@@ -198,12 +194,13 @@ function SectionLabel({ number, id }) {
 function SectionTitle({ children }) {
   return (
     <h2 style={{
-      fontFamily: "'Syne', sans-serif",
-      fontWeight: 800,
+      fontFamily: "'Montaga', serif",
+      fontWeight: 700,
       fontSize: "clamp(2rem, 5vw, 3rem)",
       color: "#f1f5f9",
       marginTop: "0.4rem",
       marginBottom: 0,
+      letterSpacing: "0.02em",
     }}>
       {children}
     </h2>
@@ -240,7 +237,7 @@ function Navbar({ active }) {
     }}>
       {/* Logo */}
       <div style={{
-        fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1.15rem",
+        fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
         color: "#10b981",
         letterSpacing: "0.04em",
       }}>
@@ -342,10 +339,11 @@ function HeroSection() {
 
         {/* Name */}
         <h1 style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 800,
+          fontFamily: "'Montaga', serif", fontWeight: 700,
           fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
           lineHeight: 1.08, marginBottom: "1rem",
           animation: "fadeUp 0.7s ease 0.15s both",
+          letterSpacing: "0.02em",
         }}>
           <span style={{ color: "#f1f5f9" }}>Hey, I'm Gabi</span>
         </h1>
@@ -472,7 +470,7 @@ function AboutSection() {
                 }}>
                   {c.icon}
                 </div>
-                <h3 style={{ color: "#f1f5f9", fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: "0.75rem" }}>
+                <h3 style={{ color: "#f1f5f9", fontFamily: "'Montaga', serif", fontWeight: 700, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
                   {c.title}
                 </h3>
                 <p style={{ color: "#64748b", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.8, fontSize: "0.93rem" }}>
@@ -565,21 +563,100 @@ function SkillsSection() {
           {categories.map((cat, ci) => (
             <Reveal key={cat} delay={ci * 100}>
               <Glass accent={CAT_ACCENT[cat]} style={{ padding: "2rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1.5rem" }}>
-                  <div style={{
-                    width: "7px", height: "7px", borderRadius: "50%",
-                    background: CAT_ACCENT[cat],
-                  }} />
-                  <span style={{
-                    color: CAT_ACCENT[cat], fontFamily: "'Syne', sans-serif",
-                    fontWeight: 700, fontSize: "0.82rem", letterSpacing: "0.12em",
-                  }}>
-                    {cat.toUpperCase()}
-                  </span>
-                </div>
+      <div style={{
+        display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1.5rem",
+        animation: "slideInLeft 0.6s ease both",
+      }}>
+        <div style={{
+          width: "7px", height: "7px", borderRadius: "50%",
+          background: CAT_ACCENT[cat],
+        }} />
+        <span style={{
+          color: CAT_ACCENT[cat], fontFamily: "'Montaga', serif",
+          fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.12em",
+        }}>
+          {cat.toUpperCase()}
+        </span>
+      </div>
                 {SKILLS.filter(s => s.category === cat).map((sk, i) => (
                   <SkillBar key={sk.name} {...sk} inView={inView} delay={i * 140 + ci * 80} />
                 ))}
+              </Glass>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── EDUCATION ────────────────────────────────────────────────────────────────
+
+function EducationSection() {
+  const education = [
+    {
+      school: "University",
+      degree: "B.Sc Software Engineering",
+      period: "2023 – Present",
+      gpa: "3.8/4.0",
+      accent: "#10b981",
+      courses: ["Data Structures", "Algorithms", "System Design", "Software Architecture"],
+    },
+  ];
+
+  return (
+    <section id="education" style={{ padding: "9rem clamp(1rem,6vw,5rem)" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+          <SectionLabel number="03" id="education" />
+          <SectionTitle>Education</SectionTitle>
+        </Reveal>
+
+        <div style={{ display: "grid", gap: "2rem" }}>
+          {education.map((edu, i) => (
+            <Reveal key={i} delay={i * 100}>
+              <Glass accent={edu.accent} style={{ padding: "2.5rem" }}>
+                <div style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "start",
+                  marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem",
+                }}>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.3rem",
+                      color: "#f1f5f9", marginBottom: "0.3rem",
+                    }}>
+                      {edu.degree}
+                    </h3>
+                    <p style={{
+                      color: "#64748b", fontFamily: "'DM Sans', sans-serif",
+                      fontSize: "0.95rem",
+                    }}>
+                      {edu.school}
+                    </p>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{
+                      color: edu.accent, fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.85rem", marginBottom: "0.3rem",
+                    }}>
+                      {edu.period}
+                    </div>
+                    <div style={{
+                      color: "#10b981", fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.85rem", fontWeight: 600,
+                    }}>
+                      GPA: {edu.gpa}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{
+                  display: "flex", flexWrap: "wrap", gap: "0.6rem",
+                }}>
+                  {edu.courses.map(course => (
+                    <Chip key={course} color={edu.accent}>{course}</Chip>
+                  ))}
+                </div>
               </Glass>
             </Reveal>
           ))}
@@ -614,15 +691,16 @@ function ProjectCard({ p, delay }) {
         }}
       >
         {/* Icon */}
-        <div style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1.8rem", color: p.accent,
-          marginBottom: "1rem",
-        }}>
-          {p.icon}
-        </div>
+      <div style={{
+        fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.6rem", color: p.accent,
+        marginBottom: "1rem",
+        animation: hov ? "float 1s ease-in-out infinite" : "none",
+      }}>
+        {p.icon}
+      </div>
 
         <h3 style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.15rem",
+          fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
           color: "#f1f5f9", marginBottom: "0.6rem",
         }}>
           {p.title}
@@ -796,7 +874,7 @@ function TimelineContent({ item }) {
       <div style={{ color: item.accent, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem", marginBottom: "0.4rem" }}>
         {item.period}
       </div>
-      <div style={{ color: "#f1f5f9", fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.2rem" }}>
+      <div style={{ color: "#f1f5f9", fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.2rem" }}>
         {item.role}
       </div>
       <div style={{ color: "#64748b", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", marginBottom: "0.7rem" }}>
@@ -822,8 +900,26 @@ function ContactSection() {
   const submit = () => {
     if (!form.name || !form.email || !form.message) return;
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSent(true); setForm({ name: "", email: "", message: "" }); }, 1400);
-    setTimeout(() => setSent(false), 4500);
+
+    emailjs.send(
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
+      {
+        to_email: "YOUR_EMAIL@example.com",
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+      }
+    ).then(() => {
+      setLoading(false);
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 4500);
+    }).catch((err) => {
+      console.error("Email send failed:", err);
+      setLoading(false);
+      alert("Failed to send message. Please try again.");
+    });
   };
 
   const inp = (field) => ({
@@ -945,8 +1041,11 @@ export default function Portfolio() {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href =
-      "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap";
+      "https://fonts.googleapis.com/css2?family=Montaga&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap";
     document.head.appendChild(link);
+
+    /* Initialize EmailJS */
+    emailjs.init("YOUR_PUBLIC_KEY_HERE");
 
     /* Track active section */
     const handler = () => {
@@ -975,12 +1074,19 @@ export default function Portfolio() {
         @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+        @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes scaleIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+        @keyframes shimmer{0%{background-position:-1000px 0;}100%{background-position:1000px 0;}}
+        @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+        @keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
       `}</style>
 
       <Navbar active={active} />
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <EducationSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
