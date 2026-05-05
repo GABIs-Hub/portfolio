@@ -453,7 +453,7 @@ function Navbar({ active }) {
 
 function HeroSection() {
   const typed = useTypewriter(
-    ["Flutter Developer", "React Native Dev", "Mobile-First Builder", "Web Developer"],
+    ["Junior Flutter Developer", "React Native Dev", "Mobile-First Builder", "Web Developer", "New to Swift"],
     80, 1900
   );
 
@@ -511,9 +511,9 @@ function HeroSection() {
           <span style={{ color: "#64748b" }}>{">"}</span>
           <span style={{ color: "#e2e8f0" }}>{typed}</span>
           <span style={{
-            display: "inline-block", width: "2px", height: "1.15em",
-            background: "#64748b", verticalAlign: "middle",
-          }} />
+            display: "inline-block", color: "#64748b", verticalAlign: "middle",
+            fontSize: "1.15em", fontWeight: "bold", animation: "blink 1s infinite",
+          }}>_</span>
         </div>
 
         {/* Bio */}
@@ -523,7 +523,7 @@ function HeroSection() {
           maxWidth: "560px", lineHeight: 1.78, marginBottom: "2.6rem",
           animation: "fadeUp 0.7s ease 0.45s both",
         }}>
-          A CS student and junior mobile developer from Nigeria — crafting
+          A Software Engineering student and junior mobile developer from Nigeria — crafting
           cross-platform apps with Flutter, React Native, and modern web tech.
           Building the future, one commit at a time.
         </p>
@@ -592,7 +592,7 @@ function BtnGhost({ children, onClick }) {
 function AboutSection() {
   const cards = [
     { icon: "{ }", title: "The Developer", accent: "#06b6d4",
-      body: "I'm David — Gabi to everyone who knows me. A CS student and junior mobile developer from Nigeria, obsessed with building cross-platform apps that feel truly native on every device." },
+      body: "I'm David — Gabi to everyone who knows me. A SEN student and junior mobile developer from Nigeria, obsessed with building cross-platform apps that feel truly native on every device." },
     { icon: "→", title: "The Journey", accent: "#8b5cf6",
       body: "My trajectory: Flutter → React Native → iOS. Started with web, moved into mobile, and I'm building toward shipping apps on every platform — including the App Store someday." },
     { icon: "◎", title: "The Goal", accent: "#10b981",
