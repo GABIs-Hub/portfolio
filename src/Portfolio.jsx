@@ -207,6 +207,54 @@ function SectionTitle({ children }) {
   );
 }
 
+// ─── COMING SOON MODAL ────────────────────────────────────────────────────────
+
+function ComingSoonModal({ isOpen, onClose }) {
+  return (
+    <>
+      {isOpen && (
+        <div onClick={onClose} style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(3,7,18,0.7)", backdropFilter: "blur(4px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 9999,
+          animation: "fadeIn 0.3s ease",
+        }}>
+          <div onClick={e => e.stopPropagation()} style={{
+            background: "rgba(255,255,255,0.08)", border: "1px solid rgba(16,185,129,0.3)",
+            borderRadius: "16px", padding: "2.5rem", maxWidth: "400px",
+            textAlign: "center", animation: "scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",
+          }}>
+            <div style={{
+              fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.4rem",
+              color: "#10b981", marginBottom: "1rem",
+            }}>
+              🚀 Coming Soon
+            </div>
+            <p style={{
+              color: "#cbd5e1", fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.95rem", lineHeight: 1.8, marginBottom: "2rem",
+            }}>
+              This project is still in progress and will be live very soon! Stay tuned for updates.
+            </p>
+            <button onClick={onClose} style={{
+              padding: "0.75rem 2rem", borderRadius: "8px",
+              background: "#10b981", border: "none",
+              color: "#fff", fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+              cursor: "pointer", transition: "all 0.3s ease",
+            }}
+              onMouseEnter={e => e.target.style.boxShadow = "0 0 20px rgba(16,185,129,0.4)"}
+              onMouseLeave={e => e.target.style.boxShadow = "none"}
+            >
+              Got It
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 
 function Navbar({ active }) {
@@ -234,6 +282,7 @@ function Navbar({ active }) {
       background: scrolled ? "rgba(3,7,18,0.95)" : "transparent",
       borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
       transition: "all 0.35s ease",
+      backdropFilter: scrolled ? "blur(10px)" : "none",
     }}>
       {/* Logo */}
       <div style={{
@@ -255,7 +304,12 @@ function Navbar({ active }) {
               fontWeight: 500, letterSpacing: "0.04em",
               transition: "color 0.22s",
               padding: 0,
-            }}>
+              filter: "blur(0px)",
+              willChange: "filter",
+            }}
+              onMouseEnter={e => e.target.style.filter = "blur(0px)"}
+              onMouseLeave={e => e.target.style.filter = "blur(0px)"}
+            >
               {l}
             </button>
           ))}
@@ -590,159 +644,95 @@ function SkillsSection() {
   );
 }
 
-// ─── EDUCATION ────────────────────────────────────────────────────────────────
-
-function EducationSection() {
-  const education = [
-    {
-      school: "University",
-      degree: "B.Sc Software Engineering",
-      period: "2023 – Present",
-      gpa: "3.8/4.0",
-      accent: "#10b981",
-      courses: ["Data Structures", "Algorithms", "System Design", "Software Architecture"],
-    },
-  ];
-
-  return (
-    <section id="education" style={{ padding: "9rem clamp(1rem,6vw,5rem)" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-          <SectionLabel number="03" id="education" />
-          <SectionTitle>Education</SectionTitle>
-        </Reveal>
-
-        <div style={{ display: "grid", gap: "2rem" }}>
-          {education.map((edu, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <Glass accent={edu.accent} style={{ padding: "2.5rem" }}>
-                <div style={{
-                  display: "flex", justifyContent: "space-between", alignItems: "start",
-                  marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem",
-                }}>
-                  <div>
-                    <h3 style={{
-                      fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.3rem",
-                      color: "#f1f5f9", marginBottom: "0.3rem",
-                    }}>
-                      {edu.degree}
-                    </h3>
-                    <p style={{
-                      color: "#64748b", fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "0.95rem",
-                    }}>
-                      {edu.school}
-                    </p>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{
-                      color: edu.accent, fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.85rem", marginBottom: "0.3rem",
-                    }}>
-                      {edu.period}
-                    </div>
-                    <div style={{
-                      color: "#10b981", fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.85rem", fontWeight: 600,
-                    }}>
-                      GPA: {edu.gpa}
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{
-                  display: "flex", flexWrap: "wrap", gap: "0.6rem",
-                }}>
-                  {edu.courses.map(course => (
-                    <Chip key={course} color={edu.accent}>{course}</Chip>
-                  ))}
-                </div>
-              </Glass>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
 
 function ProjectCard({ p, delay }) {
   const [ref, inView] = useInView();
   const [hov, setHov] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
 
   return (
-    <div ref={ref} style={{
-      opacity: inView ? 1 : 0,
-      transform: inView ? "translateY(0) scale(1)" : "translateY(28px) scale(0.97)",
-      transition: `all 0.65s ease ${delay}ms`,
-    }}>
-      <Glass
-        accent={p.accent}
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          padding: "2rem",
-          transform: hov ? "translateY(-4px)" : "translateY(0)",
-          transition: "all 0.3s ease",
-          height: "100%",
-          display: "flex", flexDirection: "column",
-        }}
-      >
-        {/* Icon */}
-      <div style={{
-        fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.6rem", color: p.accent,
-        marginBottom: "1rem",
-        animation: hov ? "float 1s ease-in-out infinite" : "none",
+    <>
+      <div ref={ref} style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0) scale(1)" : "translateY(28px) scale(0.97)",
+        transition: `all 0.65s ease ${delay}ms`,
       }}>
-        {p.icon}
+        <Glass
+          accent={p.accent}
+          onMouseEnter={() => setHov(true)}
+          onMouseLeave={() => setHov(false)}
+          style={{
+            padding: "2rem",
+            transform: hov ? "translateY(-4px)" : "translateY(0)",
+            transition: "all 0.3s ease",
+            height: "100%",
+            display: "flex", flexDirection: "column",
+          }}
+        >
+          {/* Icon */}
+        <div style={{
+          fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.6rem", color: p.accent,
+          marginBottom: "1rem",
+          animation: hov ? "float 1s ease-in-out infinite" : "none",
+        }}>
+          {p.icon}
+        </div>
+
+          <h3 style={{
+            fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
+            color: "#f1f5f9", marginBottom: "0.6rem",
+          }}>
+            {p.title}
+          </h3>
+
+          <p style={{
+            color: "#64748b", fontFamily: "'DM Sans', sans-serif",
+            fontSize: "0.88rem", lineHeight: 1.75, marginBottom: "1.5rem", flex: 1,
+          }}>
+            {p.desc}
+          </p>
+
+          {/* Tags */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
+            {p.tags.map(t => <Chip key={t} color={p.accent}>{t}</Chip>)}
+          </div>
+
+          {/* Links */}
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <button onClick={handleLinkClick} style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "#64748b", fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.8rem", textDecoration: "none",
+              transition: "color 0.2s", padding: 0,
+            }}
+              onMouseEnter={e => e.target.style.color = p.accent}
+              onMouseLeave={e => e.target.style.color = "#64748b"}
+            >
+              GitHub →
+            </button>
+            <button onClick={handleLinkClick} style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "#64748b", fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.8rem", textDecoration: "none",
+              transition: "color 0.2s", padding: 0,
+            }}
+              onMouseEnter={e => e.target.style.color = p.accent}
+              onMouseLeave={e => e.target.style.color = "#64748b"}
+            >
+              Live ↗
+            </button>
+          </div>
+        </Glass>
       </div>
-
-        <h3 style={{
-          fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
-          color: "#f1f5f9", marginBottom: "0.6rem",
-        }}>
-          {p.title}
-        </h3>
-
-        <p style={{
-          color: "#64748b", fontFamily: "'DM Sans', sans-serif",
-          fontSize: "0.88rem", lineHeight: 1.75, marginBottom: "1.5rem", flex: 1,
-        }}>
-          {p.desc}
-        </p>
-
-        {/* Tags */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
-          {p.tags.map(t => <Chip key={t} color={p.accent}>{t}</Chip>)}
-        </div>
-
-        {/* Links */}
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <a href={p.github} style={{
-            color: "#64748b", fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.8rem", textDecoration: "none",
-            transition: "color 0.2s",
-          }}
-            onMouseEnter={e => e.target.style.color = p.accent}
-            onMouseLeave={e => e.target.style.color = "#64748b"}
-          >
-            GitHub →
-          </a>
-          <a href={p.live} style={{
-            color: "#64748b", fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.8rem", textDecoration: "none",
-            transition: "color 0.2s",
-          }}
-            onMouseEnter={e => e.target.style.color = p.accent}
-            onMouseLeave={e => e.target.style.color = "#64748b"}
-          >
-            Live ↗
-          </a>
-        </div>
-      </Glass>
-    </div>
+      <ComingSoonModal isOpen={showModal} onClose={() => setShowModal(false)} />
+    </>
   );
 }
 
@@ -1022,10 +1012,13 @@ function Footer() {
     <footer style={{
       borderTop: "1px solid rgba(255,255,255,0.045)",
       padding: "2rem clamp(1rem,6vw,5rem)",
-      display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem",
+      display: "flex", flexDirection: "column", alignItems: "center", gap: "0.8rem",
     }}>
       <p style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem" }}>
         © 2026 GABI's WORKSPACE. All rights reserved.
+      </p>
+      <p style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem" }}>
+        UI Components from <a href="https://reactbits.dev" target="_blank" rel="noreferrer" style={{ color: "#10b981", textDecoration: "none" }}>ReactBits.dev</a>
       </p>
     </footer>
   );
@@ -1063,7 +1056,7 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div style={{ background: "#030712", color: "#f1f5f9", minHeight: "100vh" }}>
+    <div style={{ background: "#030712", color: "#f1f5f9", minHeight: "100vh", position: "relative", overflow: "hidden" }}>
       <style>{`
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
@@ -1071,8 +1064,27 @@ export default function Portfolio() {
         ::-webkit-scrollbar-track{background:#030712;}
         ::-webkit-scrollbar-thumb{background:rgba(16,185,129,0.3);border-radius:3px;}
 
+        /* Blob Cursor */
+        * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="8" fill="%2310b981" opacity="0.6"/></svg>') 16 16, auto; }
+
+        /* Aurora Background Animation */
+        body::before {
+          content: '';
+          position: fixed;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle at 20% 50%, rgba(16,185,129,0.15) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(107,114,128,0.1) 0%, transparent 50%);
+          animation: aurora 15s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
         @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
         @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
         @keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
@@ -1080,13 +1092,13 @@ export default function Portfolio() {
         @keyframes shimmer{0%{background-position:-1000px 0;}100%{background-position:1000px 0;}}
         @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
         @keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
+        @keyframes aurora{0%{transform:translate(0,0);}50%{transform:translate(50px,50px);}100%{transform:translate(0,0);}}
       `}</style>
 
       <Navbar active={active} />
       <HeroSection />
       <AboutSection />
       <SkillsSection />
-      <EducationSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
