@@ -194,7 +194,7 @@ function SectionLabel({ number, id }) {
 function SectionTitle({ children }) {
   return (
     <h2 style={{
-      fontFamily: "'Montaga', serif",
+      fontFamily: "'Syne', sans-serif",
       fontWeight: 700,
       fontSize: "clamp(2rem, 5vw, 3rem)",
       color: "#f1f5f9",
@@ -226,7 +226,7 @@ function ComingSoonModal({ isOpen, onClose }) {
             textAlign: "center", animation: "scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",
           }}>
             <div style={{
-              fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.4rem",
+              fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.4rem",
               color: "#10b981", marginBottom: "1rem",
             }}>
               🚀 Coming Soon
@@ -286,7 +286,7 @@ function Navbar({ active }) {
     }}>
       {/* Logo */}
       <div style={{
-        fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
+        fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.15rem",
         color: "#10b981",
         letterSpacing: "0.04em",
       }}>
@@ -393,7 +393,7 @@ function HeroSection() {
 
         {/* Name */}
         <h1 style={{
-          fontFamily: "'Montaga', serif", fontWeight: 700,
+          fontFamily: "'Syne', sans-serif", fontWeight: 700,
           fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
           lineHeight: 1.08, marginBottom: "1rem",
           animation: "fadeUp 0.7s ease 0.15s both",
@@ -524,7 +524,7 @@ function AboutSection() {
                 }}>
                   {c.icon}
                 </div>
-                <h3 style={{ color: "#f1f5f9", fontFamily: "'Montaga', serif", fontWeight: 700, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
+                <h3 style={{ color: "#f1f5f9", fontFamily: "'Syne', sans-serif", fontWeight: 700, marginBottom: "0.75rem", fontSize: "1.1rem" }}>
                   {c.title}
                 </h3>
                 <p style={{ color: "#64748b", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.8, fontSize: "0.93rem" }}>
@@ -626,7 +626,7 @@ function SkillsSection() {
           background: CAT_ACCENT[cat],
         }} />
         <span style={{
-          color: CAT_ACCENT[cat], fontFamily: "'Montaga', serif",
+          color: CAT_ACCENT[cat], fontFamily: "'Syne', sans-serif",
           fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.12em",
         }}>
           {cat.toUpperCase()}
@@ -678,7 +678,7 @@ function ProjectCard({ p, delay }) {
         >
           {/* Icon */}
         <div style={{
-          fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.6rem", color: p.accent,
+          fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.6rem", color: p.accent,
           marginBottom: "1rem",
           animation: hov ? "float 1s ease-in-out infinite" : "none",
         }}>
@@ -686,7 +686,7 @@ function ProjectCard({ p, delay }) {
         </div>
 
           <h3 style={{
-            fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1.15rem",
+            fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.15rem",
             color: "#f1f5f9", marginBottom: "0.6rem",
           }}>
             {p.title}
@@ -864,7 +864,7 @@ function TimelineContent({ item }) {
       <div style={{ color: item.accent, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem", marginBottom: "0.4rem" }}>
         {item.period}
       </div>
-      <div style={{ color: "#f1f5f9", fontFamily: "'Montaga', serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.2rem" }}>
+      <div style={{ color: "#f1f5f9", fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1rem", marginBottom: "0.2rem" }}>
         {item.role}
       </div>
       <div style={{ color: "#64748b", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", marginBottom: "0.7rem" }}>
@@ -1034,7 +1034,7 @@ export default function Portfolio() {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href =
-      "https://fonts.googleapis.com/css2?family=Montaga&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap";
+      "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap";
     document.head.appendChild(link);
 
     /* Initialize EmailJS */
