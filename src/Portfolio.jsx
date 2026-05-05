@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
@@ -79,9 +81,9 @@ const EXPERIENCE = [
 ];
 
 const SOCIALS = [
-  { label: "GitHub", href: "https://github.com/GABIs-Hub", icon: "◈" },
-  { label: "Twitter / X", href: "#", icon: "◇" },
-  { label: "LinkedIn", href: "#", icon: "◆" },
+  { label: "GitHub", href: "https://github.com/GABIs-Hub", icon: FiGithub },
+  { label: "LinkedIn", href: "www.linkedin.com/in/david-ogabi-b77a2a31a", icon: FiLinkedin },
+  { label: "WhatsApp", href: "https://wa.me/2349027876679", icon: FaWhatsapp },
 ];
 
 // ─── HOOKS ────────────────────────────────────────────────────────────────────
@@ -151,20 +153,13 @@ function Reveal({ children, delay = 0, style = {} }) {
 function Glass({ children, accent = "#06b6d4", style = {}, onMouseEnter, onMouseLeave }) {
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{
-      background: "rgba(255,255,255,0.028)",
-      border: "1px solid rgba(255,255,255,0.075)",
-      backdropFilter: "blur(16px)",
-      WebkitBackdropFilter: "blur(16px)",
-      borderRadius: "16px",
+      background: "rgba(255,255,255,0.04)",
+      border: `1px solid ${accent}22`,
+      borderRadius: "12px",
       position: "relative",
       overflow: "hidden",
       ...style,
     }}>
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: "1px",
-        background: `linear-gradient(90deg, transparent 0%, ${accent} 50%, transparent 100%)`,
-        opacity: 0.7,
-      }} />
       {children}
     </div>
   );
@@ -190,7 +185,7 @@ function Chip({ children, color = "#06b6d4" }) {
 function SectionLabel({ number, id }) {
   return (
     <span style={{
-      color: "#06b6d4",
+      color: "#64748b",
       fontFamily: "'JetBrains Mono', monospace",
       fontSize: "0.8rem",
       letterSpacing: "0.08em",
@@ -239,20 +234,17 @@ function Navbar({ active }) {
       height: "64px",
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "0 clamp(1rem, 5vw, 3rem)",
-      background: scrolled ? "rgba(3,7,18,0.88)" : "transparent",
-      backdropFilter: scrolled ? "blur(24px)" : "none",
-      WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.055)" : "none",
+      background: scrolled ? "rgba(3,7,18,0.95)" : "transparent",
+      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
       transition: "all 0.35s ease",
     }}>
       {/* Logo */}
       <div style={{
         fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1.15rem",
-        background: "linear-gradient(135deg, #06b6d4, #8b5cf6)",
-        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+        color: "#10b981",
         letterSpacing: "0.04em",
       }}>
-        GABI.DEV
+        GABI
       </div>
 
       {/* Desktop links */}
@@ -261,7 +253,7 @@ function Navbar({ active }) {
           {NAV_LINKS.map(l => (
             <button key={l} onClick={() => go(l)} style={{
               background: "none", border: "none", cursor: "pointer",
-              color: active === l.toLowerCase() ? "#06b6d4" : "#64748b",
+              color: active === l.toLowerCase() ? "#10b981" : "#64748b",
               fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
               fontWeight: 500, letterSpacing: "0.04em",
               transition: "color 0.22s",
@@ -287,7 +279,7 @@ function Navbar({ active }) {
       {open && (
         <div style={{
           position: "absolute", top: "64px", left: 0, right: 0,
-          background: "rgba(3,7,18,0.97)", backdropFilter: "blur(24px)",
+          background: "rgba(3,7,18,0.98)",
           borderBottom: "1px solid rgba(255,255,255,0.07)",
           padding: "1.5rem clamp(1rem,5vw,3rem)",
           display: "flex", flexDirection: "column", gap: "0.25rem",
@@ -322,36 +314,15 @@ function HeroSection() {
       position: "relative", overflow: "hidden",
       padding: "0 clamp(1rem, 6vw, 5rem)",
     }}>
-      {/* Grid background */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage:
-          "linear-gradient(rgba(6,182,212,0.028) 1px, transparent 1px)," +
-          "linear-gradient(90deg, rgba(6,182,212,0.028) 1px, transparent 1px)",
-        backgroundSize: "64px 64px",
-      }} />
+      {/* Grid background - removed */}
 
-      {/* Ambient blobs */}
-      <div style={{
-        position: "absolute", top: "15%", left: "5%",
-        width: "500px", height: "500px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 68%)",
-        filter: "blur(30px)", pointerEvents: "none",
-        animation: "drift1 12s ease-in-out infinite",
-      }} />
-      <div style={{
-        position: "absolute", bottom: "15%", right: "5%",
-        width: "420px", height: "420px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 68%)",
-        filter: "blur(30px)", pointerEvents: "none",
-        animation: "drift2 15s ease-in-out infinite",
-      }} />
+      {/* Ambient blobs - removed */}
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: "900px", paddingTop: "64px" }}>
         {/* Status pill */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: "0.5rem",
-          background: "rgba(6,182,212,0.1)", border: "1px solid rgba(6,182,212,0.28)",
+          background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
           borderRadius: "100px", padding: "0.4rem 1.1rem",
           marginBottom: "1.8rem",
           animation: "fadeDown 0.7s ease both",
@@ -359,11 +330,10 @@ function HeroSection() {
           <span style={{
             display: "inline-block", width: "6px", height: "6px",
             borderRadius: "50%", background: "#10b981",
-            boxShadow: "0 0 8px #10b981",
-            animation: "pulse 2s ease-in-out infinite",
+            boxShadow: "none",
           }} />
           <span style={{
-            color: "#06b6d4", fontFamily: "'JetBrains Mono', monospace",
+            color: "#10b981", fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.78rem", letterSpacing: "0.05em",
           }}>
             Available for opportunities
@@ -377,13 +347,7 @@ function HeroSection() {
           lineHeight: 1.08, marginBottom: "1rem",
           animation: "fadeUp 0.7s ease 0.15s both",
         }}>
-          <span style={{ color: "#f1f5f9" }}>Hey, I'm{" "}</span>
-          <span style={{
-            background: "linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%)",
-            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-          }}>
-            Gabi
-          </span>
+          <span style={{ color: "#f1f5f9" }}>Hey, I'm Gabi</span>
         </h1>
 
         {/* Typewriter */}
@@ -394,12 +358,11 @@ function HeroSection() {
           marginBottom: "1.6rem", minHeight: "2rem",
           animation: "fadeUp 0.7s ease 0.3s both",
         }}>
-          <span style={{ color: "#8b5cf6" }}>{">"}</span>
+          <span style={{ color: "#64748b" }}>{">"}</span>
           <span style={{ color: "#e2e8f0" }}>{typed}</span>
           <span style={{
             display: "inline-block", width: "2px", height: "1.15em",
-            background: "#06b6d4", verticalAlign: "middle",
-            animation: "blink 1s step-end infinite",
+            background: "#64748b", verticalAlign: "middle",
           }} />
         </div>
 
@@ -429,25 +392,7 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: "absolute", bottom: "2.5rem", left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
-        animation: "bounce 2.2s ease-in-out infinite",
-      }}>
-        <div style={{
-          width: "22px", height: "36px", borderRadius: "11px",
-          border: "1.5px solid rgba(255,255,255,0.13)",
-          display: "flex", justifyContent: "center", paddingTop: "5px",
-        }}>
-          <div style={{
-            width: "3px", height: "7px", borderRadius: "2px",
-            background: "#06b6d4",
-            animation: "scrollDot 2.2s ease-in-out infinite",
-          }} />
-        </div>
-      </div>
+      {/* Scroll indicator - removed */}
     </section>
   );
 }
@@ -459,10 +404,10 @@ function BtnPrimary({ children, onClick }) {
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
         padding: "0.85rem 2rem", borderRadius: "8px", border: "none",
-        background: "linear-gradient(135deg, #06b6d4, #8b5cf6)",
+        background: "#10b981",
         color: "#fff", fontFamily: "'DM Sans', sans-serif",
         fontWeight: 600, fontSize: "0.95rem", cursor: "pointer",
-        boxShadow: hov ? "0 0 40px rgba(6,182,212,0.45)" : "0 0 24px rgba(6,182,212,0.25)",
+        boxShadow: hov ? "0 0 20px rgba(16,185,129,0.3)" : "none",
         transform: hov ? "translateY(-2px)" : "translateY(0)",
         transition: "all 0.25s ease",
       }}>
@@ -478,9 +423,9 @@ function BtnGhost({ children, onClick }) {
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
         padding: "0.85rem 2rem", borderRadius: "8px",
-        border: hov ? "1px solid rgba(6,182,212,0.5)" : "1px solid rgba(255,255,255,0.1)",
-        background: "rgba(255,255,255,0.035)",
-        color: hov ? "#06b6d4" : "#e2e8f0",
+        border: hov ? "1px solid #10b981" : "1px solid rgba(255,255,255,0.15)",
+        background: "transparent",
+        color: hov ? "#10b981" : "#e2e8f0",
         fontFamily: "'DM Sans', sans-serif",
         fontWeight: 600, fontSize: "0.95rem", cursor: "pointer",
         transition: "all 0.25s ease",
@@ -592,7 +537,6 @@ function SkillBar({ name, level, category, inView, delay }) {
           background: grad,
           width: inView ? `${level}%` : "0%",
           transition: `width 1.1s cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
-          boxShadow: `0 0 10px ${CAT_ACCENT[category]}55`,
         }} />
       </div>
     </div>
@@ -606,7 +550,6 @@ function SkillsSection() {
   return (
     <section id="skills" style={{
       padding: "9rem clamp(1rem,6vw,5rem)",
-      background: "linear-gradient(180deg, transparent, rgba(6,182,212,0.018), transparent)",
     }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
@@ -625,7 +568,7 @@ function SkillsSection() {
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1.5rem" }}>
                   <div style={{
                     width: "7px", height: "7px", borderRadius: "50%",
-                    background: CAT_ACCENT[cat], boxShadow: `0 0 12px ${CAT_ACCENT[cat]}`,
+                    background: CAT_ACCENT[cat],
                   }} />
                   <span style={{
                     color: CAT_ACCENT[cat], fontFamily: "'Syne', sans-serif",
@@ -664,8 +607,7 @@ function ProjectCard({ p, delay }) {
         onMouseLeave={() => setHov(false)}
         style={{
           padding: "2rem",
-          transform: hov ? "translateY(-7px)" : "translateY(0)",
-          boxShadow: hov ? `0 24px 60px ${p.accent}1a` : "none",
+          transform: hov ? "translateY(-4px)" : "translateY(0)",
           transition: "all 0.3s ease",
           height: "100%",
           display: "flex", flexDirection: "column",
@@ -673,11 +615,8 @@ function ProjectCard({ p, delay }) {
       >
         {/* Icon */}
         <div style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 800,
-          fontSize: "1.8rem", color: p.accent,
+          fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1.8rem", color: p.accent,
           marginBottom: "1rem",
-          transition: "transform 0.3s ease",
-          transform: hov ? "scale(1.1)" : "scale(1)",
         }}>
           {p.icon}
         </div>
@@ -760,7 +699,6 @@ function ExperienceSection() {
   return (
     <section id="experience" style={{
       padding: "9rem clamp(1rem,6vw,5rem)",
-      background: "linear-gradient(180deg, transparent, rgba(139,92,246,0.018), transparent)",
     }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
@@ -775,7 +713,7 @@ function ExperienceSection() {
               position: "absolute",
               left: "50%", transform: "translateX(-50%)",
               top: 0, bottom: 0, width: "1px",
-              background: "linear-gradient(180deg, #06b6d4, #8b5cf6, rgba(139,92,246,0))",
+              background: "rgba(255,255,255,0.1)",
             }} />
           )}
 
@@ -818,7 +756,7 @@ function ExperienceSection() {
                         <div style={{ paddingLeft: "3rem", display: "flex", alignItems: "center" }}>
                           <div style={{
                             width: "12px", height: "12px", borderRadius: "50%",
-                            background: item.accent, boxShadow: `0 0 18px ${item.accent}`,
+                            background: item.accent,
                             marginLeft: "-6px",
                           }} />
                         </div>
@@ -828,7 +766,7 @@ function ExperienceSection() {
                         <div style={{ paddingRight: "3rem", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                           <div style={{
                             width: "12px", height: "12px", borderRadius: "50%",
-                            background: item.accent, boxShadow: `0 0 18px ${item.accent}`,
+                            background: item.accent,
                             marginRight: "-6px",
                           }} />
                         </div>
@@ -936,11 +874,10 @@ function ContactSection() {
             <button onClick={submit} disabled={loading || sent} style={{
               width: "100%", padding: "0.9rem", borderRadius: "8px", border: "none",
               background: sent
-                ? "linear-gradient(135deg,#10b981,#06b6d4)"
-                : "linear-gradient(135deg,#06b6d4,#8b5cf6)",
+                ? "#10b981"
+                : "#10b981",
               color: "#fff", fontFamily: "'DM Sans', sans-serif",
               fontWeight: 600, fontSize: "1rem", cursor: loading || sent ? "default" : "pointer",
-              boxShadow: "0 0 28px rgba(6,182,212,0.18)",
               transition: "all 0.3s ease",
               opacity: loading ? 0.75 : 1,
               letterSpacing: "0.02em",
@@ -953,20 +890,22 @@ function ContactSection() {
         {/* Socials */}
         <Reveal delay={200}>
           <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem", marginTop: "2.5rem" }}>
-            {SOCIALS.map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" style={{
-                color: "#475569", fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "0.82rem", textDecoration: "none",
-                display: "flex", alignItems: "center", gap: "0.4rem",
-                transition: "color 0.22s",
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = "#06b6d4"}
-                onMouseLeave={e => e.currentTarget.style.color = "#475569"}
-              >
-                <span style={{ fontSize: "0.9rem" }}>{s.icon}</span>
-                {s.label}
-              </a>
-            ))}
+            {SOCIALS.map(s => {
+              const Icon = s.icon;
+              return (
+                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" style={{
+                  color: "#475569",
+                  fontSize: "1.4rem", textDecoration: "none",
+                  display: "flex", alignItems: "center", gap: "0.4rem",
+                  transition: "color 0.22s",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = "#10b981"}
+                  onMouseLeave={e => e.currentTarget.style.color = "#475569"}
+                >
+                  <Icon />
+                </a>
+              );
+            })}
           </div>
         </Reveal>
       </div>
@@ -989,15 +928,8 @@ function Footer() {
       padding: "2rem clamp(1rem,6vw,5rem)",
       display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem",
     }}>
-      <div style={{
-        fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "1rem",
-        background: "linear-gradient(135deg,#06b6d4,#8b5cf6)",
-        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-      }}>
-        GABI.DEV
-      </div>
-      <p style={{ color: "#334155", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem" }}>
-        Designed &amp; Built by <span style={{ color: "#06b6d4" }}>Gabi</span> — with love from Nigeria 🇳🇬
+      <p style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem" }}>
+        © 2026 GABI's WORKSPACE. All rights reserved.
       </p>
     </footer>
   );
@@ -1038,31 +970,11 @@ export default function Portfolio() {
         html{scroll-behavior:smooth;}
         ::-webkit-scrollbar{width:5px;}
         ::-webkit-scrollbar-track{background:#030712;}
-        ::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.28);border-radius:3px;}
+        ::-webkit-scrollbar-thumb{background:rgba(16,185,129,0.3);border-radius:3px;}
 
         @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-        @keyframes bounce{
-          0%,100%{transform:translateX(-50%) translateY(0);}
-          50%{transform:translateX(-50%) translateY(-9px);}
-        }
-        @keyframes scrollDot{
-          0%{transform:translateY(0);opacity:1;}
-          100%{transform:translateY(14px);opacity:0;}
-        }
-        @keyframes drift1{
-          0%,100%{transform:translate(0,0);}
-          50%{transform:translate(30px,-20px);}
-        }
-        @keyframes drift2{
-          0%,100%{transform:translate(0,0);}
-          50%{transform:translate(-25px,20px);}
-        }
-        @keyframes pulse{
-          0%,100%{opacity:1;box-shadow:0 0 8px #10b981;}
-          50%{opacity:0.6;box-shadow:0 0 20px #10b981;}
-        }
       `}</style>
 
       <Navbar active={active} />
