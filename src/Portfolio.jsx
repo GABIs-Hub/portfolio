@@ -282,7 +282,6 @@ function Navbar({ active }) {
       background: scrolled ? "rgba(3,7,18,0.95)" : "transparent",
       borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
       transition: "all 0.35s ease",
-      backdropFilter: scrolled ? "blur(10px)" : "none",
     }}>
       {/* Logo */}
       <div style={{
@@ -304,12 +303,7 @@ function Navbar({ active }) {
               fontWeight: 500, letterSpacing: "0.04em",
               transition: "color 0.22s",
               padding: 0,
-              filter: "blur(0px)",
-              willChange: "filter",
-            }}
-              onMouseEnter={e => e.target.style.filter = "blur(0px)"}
-              onMouseLeave={e => e.target.style.filter = "blur(0px)"}
-            >
+            }}>
               {l}
             </button>
           ))}
@@ -1012,13 +1006,10 @@ function Footer() {
     <footer style={{
       borderTop: "1px solid rgba(255,255,255,0.045)",
       padding: "2rem clamp(1rem,6vw,5rem)",
-      display: "flex", flexDirection: "column", alignItems: "center", gap: "0.8rem",
+      display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem",
     }}>
       <p style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.78rem" }}>
         © 2026 GABI's WORKSPACE. All rights reserved.
-      </p>
-      <p style={{ color: "#64748b", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem" }}>
-        UI Components from <a href="https://reactbits.dev" target="_blank" rel="noreferrer" style={{ color: "#10b981", textDecoration: "none" }}>ReactBits.dev</a>
       </p>
     </footer>
   );
@@ -1056,7 +1047,7 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div style={{ background: "#030712", color: "#f1f5f9", minHeight: "100vh", position: "relative", overflow: "hidden" }}>
+    <div style={{ background: "#030712", color: "#f1f5f9", minHeight: "100vh" }}>
       <style>{`
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
@@ -1064,27 +1055,8 @@ export default function Portfolio() {
         ::-webkit-scrollbar-track{background:#030712;}
         ::-webkit-scrollbar-thumb{background:rgba(16,185,129,0.3);border-radius:3px;}
 
-        /* Blob Cursor */
-        * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="8" fill="%2310b981" opacity="0.6"/></svg>') 16 16, auto; }
-
-        /* Aurora Background Animation */
-        body::before {
-          content: '';
-          position: fixed;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle at 20% 50%, rgba(16,185,129,0.15) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 80%, rgba(107,114,128,0.1) 0%, transparent 50%);
-          animation: aurora 15s ease-in-out infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
         @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
         @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
         @keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
@@ -1092,7 +1064,6 @@ export default function Portfolio() {
         @keyframes shimmer{0%{background-position:-1000px 0;}100%{background-position:1000px 0;}}
         @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
         @keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
-        @keyframes aurora{0%{transform:translate(0,0);}50%{transform:translate(50px,50px);}100%{transform:translate(0,0);}}
       `}</style>
 
       <Navbar active={active} />
