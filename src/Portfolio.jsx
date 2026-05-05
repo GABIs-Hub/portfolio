@@ -77,7 +77,7 @@ const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact
 const SKILLS = [
   { name: "Flutter", level: 75, category: "Mobile" },
   { name: "React Native", level: 40, category: "Mobile" },
-  { name: "Swift", level: 35, category: "Mobile" },
+  { name: "Swift", level: 5, category: "Mobile" },
   { name: "Kotlin / Jetpack Compose", level: 65, category: "Mobile" },
   { name: "React", level: 80, category: "Web" },
   { name: "TypeScript", level: 75, category: "Web" },
@@ -92,7 +92,7 @@ const SKILLS = [
   {name: "Android Studio", level: 90, category: "Tools" },
   {name: "Gradle", level: 89, category: "Tools" },
   {name: "npm / yarn", level: 84, category: "Tools" },
-  {name: "Framer Motion", level: 25, category: "Tools" },
+  {name: "Framer Motion", level: 25, category: "Design" },
 
 ];
 
@@ -991,6 +991,10 @@ function ContactSection() {
   const submit = () => {
     if (!form.name || !form.email || !form.message) return;
     setLoading(true);
+
+    emailjs.init({
+        publicKey: 'rmvDbJQm6p7_1Z3-K'     
+    })
 
     emailjs.send(
       "service_3eiehja",
