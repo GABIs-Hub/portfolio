@@ -3,6 +3,73 @@ import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 
+// ─── BLOB CURSOR ──────────────────────────────────────────────────────────────
+
+function BlobCursor({ activeSection }) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const blobRef = useRef(null);
+
+  const sectionColors = {
+    home: "#10b981",
+    about: "#06b6d4",
+    skills: "#8b5cf6",
+    projects: "#f59e0b",
+    experience: "#10b981",
+    contact: "#ec4899",
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setPos({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = () => {
+      const target = event?.target;
+      if (target?.style && (target.onclick || target.tagName === "A" || target.tagName === "BUTTON")) {
+        setIsHovering(true);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovering(false);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseenter", handleMouseEnter, true);
+    document.addEventListener("mouseleave", handleMouseLeave, true);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseenter", handleMouseEnter, true);
+      document.removeEventListener("mouseleave", handleMouseLeave, true);
+    };
+  }, []);
+
+  const color = sectionColors[activeSection] || "#10b981";
+
+  return (
+    <div
+      ref={blobRef}
+      style={{
+        position: "fixed",
+        left: `${pos.x}px`,
+        top: `${pos.y}px`,
+        width: isHovering ? "30px" : "20px",
+        height: isHovering ? "30px" : "20px",
+        background: color,
+        borderRadius: "50%",
+        pointerEvents: "none",
+        zIndex: 999,
+        transform: "translate(-50%, -50%)",
+        transition: "width 0.3s ease, height 0.3s ease, background 0.3s ease",
+        boxShadow: `0 0 20px ${color}40`,
+        filter: "blur(0.5px)",
+      }}
+    />
+  );
+}
+
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
@@ -261,12 +328,24 @@ function Navbar({ active }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const w = useWindowWidth();
+  const [underlinePos, setUnderlinePos] = useState(0);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
+
+  useEffect(() => {
+    if (w >= 768 && navRef.current) {
+      const activeBtn = navRef.current.querySelector(`[data-section="${active}"]`);
+      if (activeBtn) {
+        const pos = activeBtn.offsetLeft + activeBtn.offsetWidth / 2;
+        setUnderlinePos(pos);
+      }
+    }
+  }, [active, w]);
 
   const go = (id) => {
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
@@ -294,19 +373,37 @@ function Navbar({ active }) {
 
       {/* Desktop links */}
       {w >= 768 && (
-        <div style={{ display: "flex", gap: "2.2rem" }}>
+        <div ref={navRef} style={{ display: "flex", gap: "2.2rem", position: "relative" }}>
           {NAV_LINKS.map(l => (
-            <button key={l} onClick={() => go(l)} style={{
-              background: "none", border: "none", cursor: "pointer",
-              color: active === l.toLowerCase() ? "#10b981" : "#64748b",
-              fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
-              fontWeight: 500, letterSpacing: "0.04em",
-              transition: "color 0.22s",
-              padding: 0,
-            }}>
+            <button
+              key={l}
+              data-section={l.toLowerCase()}
+              onClick={() => go(l)}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                color: active === l.toLowerCase() ? "#10b981" : "#64748b",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: active === l.toLowerCase() ? "1.1rem" : "0.875rem",
+                fontWeight: active === l.toLowerCase() ? 700 : 500,
+                letterSpacing: "0.04em",
+                transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                padding: 0,
+                transform: active === l.toLowerCase() ? "scale(1.15)" : "scale(1)",
+              }}>
               {l}
             </button>
           ))}
+          {/* Sliding underline */}
+          <div style={{
+            position: "absolute",
+            bottom: "-8px",
+            height: "2px",
+            width: "20px",
+            background: "#10b981",
+            left: `calc(${underlinePos}px - 10px)`,
+            transition: "left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            borderRadius: "1px",
+          }} />
         </div>
       )}
 
@@ -453,9 +550,9 @@ function BtnPrimary({ children, onClick }) {
         background: "#10b981",
         color: "#fff", fontFamily: "'DM Sans', sans-serif",
         fontWeight: 600, fontSize: "0.95rem", cursor: "pointer",
-        boxShadow: hov ? "0 0 20px rgba(16,185,129,0.3)" : "none",
-        transform: hov ? "translateY(-2px)" : "translateY(0)",
-        transition: "all 0.25s ease",
+        boxShadow: hov ? "0 0 30px rgba(16,185,129,0.5), inset 0 0 20px rgba(255,255,255,0.1)" : "0 0 15px rgba(16,185,129,0.3)",
+        transform: hov ? "translateY(-4px) scale(1.05)" : "translateY(0)",
+        transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }}>
       {children}
     </button>
@@ -469,12 +566,14 @@ function BtnGhost({ children, onClick }) {
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{
         padding: "0.85rem 2rem", borderRadius: "8px",
-        border: hov ? "1px solid #10b981" : "1px solid rgba(255,255,255,0.15)",
-        background: "transparent",
+        border: hov ? "2px solid #10b981" : "1.5px solid rgba(255,255,255,0.15)",
+        background: hov ? "rgba(16,185,129,0.1)" : "transparent",
         color: hov ? "#10b981" : "#e2e8f0",
         fontFamily: "'DM Sans', sans-serif",
         fontWeight: 600, fontSize: "0.95rem", cursor: "pointer",
-        transition: "all 0.25s ease",
+        transform: hov ? "translateY(-4px) scale(1.03)" : "translateY(0)",
+        boxShadow: hov ? "0 0 20px rgba(16,185,129,0.3)" : "none",
+        transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }}>
       {children}
     </button>
@@ -878,6 +977,7 @@ function ContactSection() {
   const [focused, setFocused] = useState(null);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [hoveredSocial, setHoveredSocial] = useState(null);
 
   const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
 
@@ -974,13 +1074,15 @@ function ContactSection() {
               const Icon = s.icon;
               return (
                 <a key={s.label} href={s.href} target="_blank" rel="noreferrer" style={{
-                  color: "#475569",
-                  fontSize: "1.4rem", textDecoration: "none",
+                  color: hoveredSocial === s.label ? "#10b981" : "#475569",
+                  fontSize: hoveredSocial === s.label ? "1.8rem" : "1.4rem",
+                  textDecoration: "none",
                   display: "flex", alignItems: "center", gap: "0.4rem",
-                  transition: "color 0.22s",
+                  transition: "all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  transform: hoveredSocial === s.label ? "scale(1.2) translateY(-4px)" : "scale(1)",
                 }}
-                  onMouseEnter={e => e.currentTarget.style.color = "#10b981"}
-                  onMouseLeave={e => e.currentTarget.style.color = "#475569"}
+                  onMouseEnter={() => setHoveredSocial(s.label)}
+                  onMouseLeave={() => setHoveredSocial(null)}
                 >
                   <Icon />
                 </a>
@@ -1049,7 +1151,7 @@ export default function Portfolio() {
   return (
     <div style={{ background: "#030712", color: "#f1f5f9", minHeight: "100vh" }}>
       <style>{`
-        *{margin:0;padding:0;box-sizing:border-box;}
+        *{margin:0;padding:0;box-sizing:border-box;cursor:none;}
         html{scroll-behavior:smooth;}
         ::-webkit-scrollbar{width:5px;}
         ::-webkit-scrollbar-track{background:#030712;}
@@ -1064,8 +1166,10 @@ export default function Portfolio() {
         @keyframes shimmer{0%{background-position:-1000px 0;}100%{background-position:1000px 0;}}
         @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
         @keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
       `}</style>
 
+      <BlobCursor activeSection={active} />
       <Navbar active={active} />
       <HeroSection />
       <AboutSection />
