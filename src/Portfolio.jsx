@@ -902,10 +902,10 @@ function ContactSection() {
     setLoading(true);
 
     emailjs.send(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
+      "service_3eiehja",
+      "template_cyjeja4",
       {
-        to_email: "YOUR_EMAIL@example.com",
+        to_email: "ogabidavid16@gmail.com",
         from_name: form.name,
         from_email: form.email,
         message: form.message,
