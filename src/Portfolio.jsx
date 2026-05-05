@@ -82,11 +82,18 @@ const SKILLS = [
   { name: "React", level: 80, category: "Web" },
   { name: "TypeScript", level: 75, category: "Web" },
   { name: "Tailwind CSS", level: 85, category: "Web" },
-  { name: "Firebase", level: 70, category: "Backend" },
-  { name: "Supabase", level: 60, category: "Backend" },
-  { name: "Neon", level: 5, category: "Backend" },
+  { name: "Firebase", level: 71, category: "Backend" },
+  { name: "Supabase", level: 62, category: "Backend" },
+  { name: "Neon", level: 7, category: "Backend" },
   { name: "Node.js", level: 65, category: "Backend" },
-  { name: "Git / GitHub", level: 82, category: "Tools" },
+  { name: "Git / GitHub", level: 100, category: "Tools" },
+  {name: "VS Code", level: 90, category: "Tools" },
+  {name: "Figma", level: 70, category: "Design" },
+  {name: "Android Studio", level: 90, category: "Tools" },
+  {name: "Gradle", level: 89, category: "Tools" },
+  {name: "npm / yarn", level: 84, category: "Tools" },
+  {name: "Framer Motion", level: 25, category: "Tools" },
+
 ];
 
 const PROJECTS = [
@@ -131,7 +138,7 @@ const EXPERIENCE = [
     period: "2024",
     role: "Frontend Developer",
     org: "NACOS DU",
-    desc: "Built the Admin section of the NACOS DU Resource System — custom dashboard, navigation, and approval workflows using React, TypeScript, and Tailwind CSS.",
+    desc: "Worked on the project with other developers creating  — custom dashboard, navigation, and approval workflows using React, TypeScript, and Tailwind CSS.",
     accent: "#8b5cf6",
   },
   {
