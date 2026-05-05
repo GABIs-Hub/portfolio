@@ -329,6 +329,95 @@ function ComingSoonModal({ isOpen, onClose }) {
   );
 }
 
+// ─── CLOCK ────────────────────────────────────────────────────────────────────
+
+const TIMEZONES = [
+  "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles",
+  "Europe/London", "Europe/Paris", "Europe/Berlin", "Europe/Moscow",
+  "Asia/Tokyo", "Asia/Shanghai", "Asia/Hong_Kong", "Asia/Dubai", "Asia/Kolkata",
+  "Australia/Sydney", "Australia/Melbourne", "Pacific/Auckland",
+  "Africa/Lagos", "Africa/Cairo", "Africa/Johannesburg",
+  "America/Sao_Paulo", "America/Buenos_Aires",
+];
+
+function Clock() {
+  const [time, setTime] = useState("");
+  const [timezone, setTimezone] = useState(() => {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  });
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: timezone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      });
+      setTime(formatter.format(now));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, [timezone]);
+
+  return (
+    <div style={{ position: "relative" }}>
+      <button onClick={() => setShowDropdown(!showDropdown)} style={{
+        background: "none", border: "none", cursor: "pointer",
+        color: "#64748b", fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "0.85rem", padding: "0.5rem 0.8rem",
+        borderRadius: "6px", transition: "all 0.3s ease",
+        hover: { color: "#e2e8f0", background: "rgba(16,185,129,0.1)" },
+      }}
+        onMouseEnter={e => {
+          e.target.style.color = "#e2e8f0";
+          e.target.style.background = "rgba(16,185,129,0.1)";
+        }}
+        onMouseLeave={e => {
+          e.target.style.color = "#64748b";
+          e.target.style.background = "none";
+        }}
+      >
+        {time}
+      </button>
+
+      {showDropdown && (
+        <div style={{
+          position: "absolute", top: "100%", right: 0, marginTop: "0.5rem",
+          background: "rgba(3,7,18,0.98)", border: "1px solid rgba(16,185,129,0.3)",
+          borderRadius: "8px", maxHeight: "300px", overflowY: "auto",
+          zIndex: 1001, minWidth: "200px", boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+        }}>
+          {TIMEZONES.map(tz => (
+            <button key={tz} onClick={() => {
+              setTimezone(tz);
+              setShowDropdown(false);
+            }} style={{
+              width: "100%", background: timezone === tz ? "rgba(16,185,129,0.2)" : "transparent",
+              border: "none", cursor: "pointer",
+              color: timezone === tz ? "#10b981" : "#cbd5e1",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.85rem", padding: "0.7rem 1rem",
+              textAlign: "left", transition: "all 0.2s ease",
+              borderBottom: "1px solid rgba(255,255,255,0.04)",
+            }}
+              onMouseEnter={e => e.target.style.background = "rgba(16,185,129,0.15)"}
+              onMouseLeave={e => e.target.style.background = timezone === tz ? "rgba(16,185,129,0.2)" : "transparent"}
+            >
+              {tz}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 
 function Navbar({ active }) {
@@ -374,7 +463,13 @@ function Navbar({ active }) {
         fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: "1.15rem",
         color: "#10b981",
         letterSpacing: "0.04em",
-      }}>
+        cursor: "pointer",
+        transition: "transform 0.3s ease",
+        transformOrigin: "center",
+      }}
+        onMouseEnter={e => e.currentTarget.style.transform = "scale(1.15)"}
+        onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+      >
         GABI
       </div>
 
@@ -414,15 +509,21 @@ function Navbar({ active }) {
         </div>
       )}
 
-      {/* Mobile hamburger */}
-      {w < 768 && (
-        <button onClick={() => setOpen(o => !o)} style={{
-          background: "none", border: "none", cursor: "pointer",
-          color: "#e2e8f0", fontSize: "1.4rem", lineHeight: 1,
-        }}>
-          {open ? "✕" : "≡"}
-        </button>
-      )}
+      {/* Right side - Clock and Mobile hamburger */}
+      <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+        {/* Clock - visible on all screen sizes */}
+        <Clock />
+
+        {/* Mobile hamburger */}
+        {w < 768 && (
+          <button onClick={() => setOpen(o => !o)} style={{
+            background: "none", border: "none", cursor: "pointer",
+            color: "#e2e8f0", fontSize: "1.4rem", lineHeight: 1,
+          }}>
+            {open ? "✕" : "≡"}
+          </button>
+        )}
+      </div>
 
       {/* Mobile drawer */}
       {open && (
