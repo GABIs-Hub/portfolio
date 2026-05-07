@@ -2,6 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
+import LogoLoop from './components/LogoLoop';
+import {
+  SiReact, SiFlutter, SiKotlin, SiDart,
+  SiTypescript, SiTailwindcss, SiVite,
+  SiFirebase, SiGit, SiJavascript, SiAndroid
+} from 'react-icons/si';
 
 // ─── BLOB CURSOR ──────────────────────────────────────────────────────────────
 
@@ -152,7 +158,7 @@ const EXPERIENCE = [
 
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/GABIs-Hub", icon: FiGithub },
-  { label: "LinkedIn", href: "www.linkedin.com/in/david-ogabi-b77a2a31a", icon: FiLinkedin },
+  { label: "LinkedIn", href: "https://linkedin.com/in/david-ogabi-b77a2a31a", icon: FiLinkedin },
   { label: "WhatsApp", href: "https://wa.me/2349027876679", icon: FaWhatsapp },
 ];
 
@@ -564,9 +570,7 @@ function HeroSection() {
       position: "relative", overflow: "hidden",
       padding: "0 clamp(1rem, 6vw, 5rem)",
     }}>
-      {/* Grid background - removed */}
 
-      {/* Ambient blobs - removed */}
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: "900px", paddingTop: "64px" }}>
         {/* Status pill */}
@@ -841,6 +845,59 @@ function SkillsSection() {
           ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+
+// ─── TECH MARQUEE ─────────────────────────────────────────────────────────────
+
+const techStack = [
+  { node: <SiReact color="#61DAFB" />,       title: "React" },
+  { node: <SiReact color="#61DAFB" />,       title: "React Native" },
+  { node: <SiFlutter color="#54C5F8" />,     title: "Flutter" },
+  { node: <SiDart color="#00B4AB" />,        title: "Dart" },
+  { node: <SiKotlin color="#7F52FF" />,      title: "Kotlin" },
+  { node: <SiAndroid color="#3DDC84" />,     title: "Jetpack Compose" },
+  { node: <SiTypescript color="#3178C6" />,  title: "TypeScript" },
+  { node: <SiJavascript color="#F7DF1E" />,  title: "JavaScript" },
+  { node: <SiTailwindcss color="#38BDF8" />, title: "Tailwind CSS" },
+  { node: <SiVite color="#646CFF" />,        title: "Vite" },
+  { node: <SiFirebase color="#FFCA28" />,    title: "Firebase" },
+  { node: <SiGit color="#F05032" />,         title: "Git" },
+];
+
+function TechMarqueeSection() {
+  return (
+    <section style={{
+      padding: "2rem 0 4rem",
+      overflow: "hidden",
+    }}>
+      {/* Label */}
+      <p style={{
+        textAlign: "center",
+        color: "#334155",
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "0.75rem",
+        letterSpacing: "0.12em",
+        marginBottom: "2rem",
+        textTransform: "uppercase",
+      }}>
+        // technologies i work with
+      </p>
+
+      <LogoLoop
+        logos={techStack}
+        speed={70}
+        direction="left"
+        logoHeight={36}
+        gap={56}
+        pauseOnHover
+        scaleOnHover
+        fadeOut
+        fadeOutColor="#030712"
+        ariaLabel="Tech stack"
+      />
     </section>
   );
 }
@@ -1282,6 +1339,7 @@ export default function Portfolio() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <TechMarqueeSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
