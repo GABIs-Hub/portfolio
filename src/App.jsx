@@ -6,8 +6,8 @@ export default function App() {
     <>
       <BlobCursor 
       fillColor="#17b6a9"
-        trailCount={3}
-        sizes={[60, 40, 25]}
+        trailCount={5}
+        sizes={[60, 50, 40, 25, 10]}
         opacities={[0.6, 0.5, 0.35]}
         shadowColor="#45a9ec"
         fastDuration={0.1}

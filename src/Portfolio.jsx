@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
-import LogoLoop from './components/LogoLoop';
 import {
   SiReact, SiFlutter, SiKotlin, SiDart,
   SiTypescript, SiTailwindcss, SiVite,
@@ -93,12 +92,12 @@ const SKILLS = [
   { name: "Neon", level: 7, category: "Backend" },
   { name: "Node.js", level: 65, category: "Backend" },
   { name: "Git / GitHub", level: 100, category: "Tools" },
-  {name: "VS Code", level: 90, category: "Tools" },
-  {name: "Figma", level: 70, category: "Design" },
-  {name: "Android Studio", level: 90, category: "Tools" },
-  {name: "Gradle", level: 89, category: "Tools" },
-  {name: "npm / yarn", level: 84, category: "Tools" },
-  {name: "Framer Motion", level: 25, category: "Design" },
+  { name: "VS Code", level: 90, category: "Tools" },
+  { name: "Figma", level: 70, category: "Design" },
+  { name: "Android Studio", level: 90, category: "Tools" },
+  { name: "Gradle", level: 89, category: "Tools" },
+  { name: "npm / yarn", level: 84, category: "Tools" },
+  { name: "Framer Motion", level: 25, category: "Design" },
 
 ];
 
@@ -850,59 +849,6 @@ function SkillsSection() {
 }
 
 
-// ─── TECH MARQUEE ─────────────────────────────────────────────────────────────
-
-const techStack = [
-  { node: <SiReact color="#61DAFB" />,       title: "React" },
-  { node: <SiReact color="#61DAFB" />,       title: "React Native" },
-  { node: <SiFlutter color="#54C5F8" />,     title: "Flutter" },
-  { node: <SiDart color="#00B4AB" />,        title: "Dart" },
-  { node: <SiKotlin color="#7F52FF" />,      title: "Kotlin" },
-  { node: <SiAndroid color="#3DDC84" />,     title: "Jetpack Compose" },
-  { node: <SiTypescript color="#3178C6" />,  title: "TypeScript" },
-  { node: <SiJavascript color="#F7DF1E" />,  title: "JavaScript" },
-  { node: <SiTailwindcss color="#38BDF8" />, title: "Tailwind CSS" },
-  { node: <SiVite color="#646CFF" />,        title: "Vite" },
-  { node: <SiFirebase color="#FFCA28" />,    title: "Firebase" },
-  { node: <SiGit color="#F05032" />,         title: "Git" },
-];
-
-function TechMarqueeSection() {
-  return (
-    <section style={{
-      padding: "2rem 0 4rem",
-      overflow: "hidden",
-    }}>
-      {/* Label */}
-      <p style={{
-        textAlign: "center",
-        color: "#334155",
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: "0.75rem",
-        letterSpacing: "0.12em",
-        marginBottom: "2rem",
-        textTransform: "uppercase",
-      }}>
-        // technologies i work with
-      </p>
-
-      <LogoLoop
-        logos={techStack}
-        speed={70}
-        direction="left"
-        logoHeight={36}
-        gap={56}
-        pauseOnHover
-        scaleOnHover
-        fadeOut
-        fadeOutColor="#030712"
-        ariaLabel="Tech stack"
-      />
-    </section>
-  );
-}
-
-
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
 
 function ProjectCard({ p, delay }) {
@@ -1339,7 +1285,6 @@ export default function Portfolio() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
-      <TechMarqueeSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
