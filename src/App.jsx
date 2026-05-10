@@ -4,16 +4,24 @@ import BlobCursor from './components/BlobCursor'
 export default function App() {
   return (
     <>
-      <BlobCursor 
-      fillColor="#17b6a9"
-        trailCount={5}
-        sizes={[60, 50, 40, 25, 10]}
-        opacities={[0.6, 0.5, 0.35]}
-        shadowColor="#45a9ec"
+      <BlobCursor
+        blobType="circle"
+        fillColor="#24f0c9"
+        trailCount={3}
+        sizes={[40,60,80]}
+        innerSizes={[20,35,25]}
+        innerColor="rgba(255,255,255,0.8)"
+        opacities={[0.6,0.6,0.6]}
+        shadowColor="rgba(0,0,0,0.75)"
+        shadowBlur={5}
+        shadowOffsetX={10}
+        shadowOffsetY={10}
+        filterStdDeviation={30}
+        useFilter={true}
         fastDuration={0.1}
-        slowDuration={0.4}
-        enableFilter={false}
-        />
+        slowDuration={0.5}
+        zIndex={100}
+      />
       <Portfolio />
     </>
   )

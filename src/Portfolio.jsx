@@ -529,7 +529,7 @@ function AboutSection() {
               <Glass accent={c.accent} style={{ padding: "2rem", height: "100%" }}>
                 <div
                   style={{
-                    fontFamily: "'Syne', sans-serif",
+                    fontFamily: "'Syne', mono",
                     fontSize: "1.6rem",
                     fontWeight: 800,
                     color: c.accent,
@@ -541,7 +541,7 @@ function AboutSection() {
                 <h3
                   style={{
                     color: "#f1f5f9",
-                    fontFamily: "'Syne', sans-serif",
+                    fontFamily: "'Syne', mono",
                     fontWeight: 700,
                     marginBottom: "0.75rem",
                     fontSize: "1.1rem",

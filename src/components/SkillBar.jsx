@@ -18,13 +18,13 @@ export function SkillBar({ name, level, category, inView, delay }) {
   }[category] || "linear-gradient(90deg,#06b6d4,#8b5cf6)";
 
   return (
-    <div className="mb-4.5">
-      <div className="flex justify-between mb-2">
+    <div className="mb-10">
+      <div className="flex justify-between mb-20">
         <span className="text-slate-300 font-sans text-sm">
           {name}
         </span>
         <span
-          className="font-mono text-xs"
+          className="font-sans text-xs"
           style={{ color: CAT_ACCENT[category] }}
         >
           {level}%
@@ -36,7 +36,7 @@ export function SkillBar({ name, level, category, inView, delay }) {
             height: "100%",
             borderRadius: "100px",
             background: grad,
-            width: inView ? `${level}%` : "0%",
+            width: inView ? `${level}%` : "20%",
             transition: `width 1.1s cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
           }}
         />
