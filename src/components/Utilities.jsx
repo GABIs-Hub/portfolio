@@ -127,7 +127,7 @@ export function ComingSoonModal({ isOpen, onClose }) {
             right: 0,
             bottom: 0,
             background: "rgba(3,7,18,0.7)",
-            backdropFilter: "blur(4px)",
+            backdropFilter: "blur(3px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

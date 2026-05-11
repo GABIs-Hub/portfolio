@@ -19,21 +19,21 @@ import { Clock, ComingSoonModal } from "./components/Utilities";
 const NAV_LINKS = ["Home", "About", "Skills", "Projects", "Experience", "Contact"];
 
 const SKILLS = [
-  { name: "Flutter", level: 75, category: "Mobile" },
-  { name: "React Native", level: 40, category: "Mobile" },
-  { name: "Swift", level: 5, category: "Mobile" },
+  { name: "Flutter", level: 77, category: "Mobile" },
+  { name: "React Native", level: 32, category: "Mobile" },
+  { name: "Swift", level: 7, category: "Mobile" },
   { name: "Kotlin / Jetpack Compose", level: 65, category: "Mobile" },
   { name: "React", level: 80, category: "Web" },
   { name: "TypeScript", level: 75, category: "Web" },
   { name: "Tailwind CSS", level: 85, category: "Web" },
-  { name: "Firebase", level: 71, category: "Backend" },
+  { name: "Firebase", level: 67, category: "Backend" },
   { name: "Supabase", level: 62, category: "Backend" },
   { name: "Neon", level: 7, category: "Backend" },
   { name: "Node.js", level: 65, category: "Backend" },
   { name: "Git / GitHub", level: 100, category: "Tools" },
-  { name: "VS Code", level: 90, category: "Tools" },
-  { name: "Figma", level: 70, category: "Design" },
-  { name: "Android Studio", level: 90, category: "Tools" },
+  { name: "VS Code", level: 94, category: "Tools" },
+  { name: "Figma", level: 66, category: "Design" },
+  { name: "Android Studio", level: 95, category: "Tools" },
   { name: "Gradle", level: 89, category: "Tools" },
   { name: "npm / yarn", level: 84, category: "Tools" },
   { name: "Framer", level: 10, category: "Design" },
@@ -406,7 +406,10 @@ function HeroSection() {
         >
           <span style={{ color: "#f1f5f9" }}>Hey, </span>
           <span style={{ color: "#f1f5f9", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I'm </span>
-          <span style={{ color: "#30AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>GABI</span>
+          <span style={{ color: "#30AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>G</span>
+          <span style={{ color: "#40AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>A</span>
+          <span style={{ color: "#50AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>B</span>
+          <span style={{ color: "#60AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I</span>
         </h1>
 
         <div
