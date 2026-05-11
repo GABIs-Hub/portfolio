@@ -77,9 +77,14 @@ export function SectionLabel({ number, id }) {
 
 export function SectionTitle({ children }) {
   return (
-    <h2 className="font-syne font-bold text-slate-100 mt-1 mb-0 tracking-wide" style={{
-      fontSize: "clamp(2rem, 5vw, 3rem)",
+    <h2 style={{
+      fontFamily: "'Syne', sans-serif",
+      fontWeight: 700,
+      fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+      lineHeight: 1.08,
+      color: "#f1f5f9",
       letterSpacing: "0.02em",
+      margin: 0,
     }}>
       {children}
     </h2>

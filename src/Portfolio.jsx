@@ -10,6 +10,7 @@ import {
 
 import BlobCursor from "./components/BlobCursor";
 import { Reveal, Glass, Chip, SectionLabel, SectionTitle, BtnPrimary, BtnGhost } from "./components/UI";
+import { LogoLoop } from "./components/LogoLoop";
 import { SkillBar } from "./components/SkillBar";
 import { Clock, ComingSoonModal } from "./components/Utilities";
 
@@ -206,6 +207,10 @@ function Navbar({ active }) {
           transition: "transform 0.3s ease",
           transformOrigin: "center",
         }}
+        onClick={() => {
+          document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+          setActive("home");
+        }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.15)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
@@ -399,7 +404,9 @@ function HeroSection() {
             letterSpacing: "0.02em",
           }}
         >
-          <span style={{ color: "#f1f5f9" }}>Hey, I'm Gabi</span>
+          <span style={{ color: "#f1f5f9" }}>Hey, </span>
+          <span style={{ color: "#f1f5f9", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I'm </span>
+          <span style={{ color: "#30AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>GABI</span>
         </h1>
 
         <div
@@ -620,12 +627,77 @@ function SkillsSection() {
   const [sRef, inView] = useInView(0.1);
   const categories = [...new Set(SKILLS.map((s) => s.category))];
 
+  const techStackLogos = [
+    { node: <SiFlutter size={60} />, title: "Flutter" },
+    { node: <SiReact size={60} />, title: "React" },
+    { node: <SiKotlin size={60} />, title: "Kotlin" },
+    { node: <SiTypescript size={60} />, title: "TypeScript" },
+    { node: <SiTailwindcss size={60} />, title: "Tailwind CSS" },
+    { node: <SiVite size={60} />, title: "Vite" },
+    { node: <SiFirebase size={60} />, title: "Firebase" },
+    { node: <SiGit size={60} />, title: "Git" },
+    { node: <SiJavascript size={60} />, title: "JavaScript" },
+    { node: <SiAndroid size={60} />, title: "Android" },
+    { node: <SiDart size={60} />, title: "Dart" },
+  ];
+
   return (
     <section id="skills" style={{ padding: "9rem clamp(1rem,6vw,5rem)" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+        <Reveal style={{ textAlign: "center", marginBottom: "2rem" }}>
           <SectionLabel number="02" id="skills" />
           <SectionTitle>My Tech Stack</SectionTitle>
+        </Reveal>
+
+        <Reveal style={{ marginBottom: "5rem" }}>
+          <div style={{
+            background: "rgba(255,255,255,0.02)",
+            border: "1px solid rgba(36,240,201,0.2)",
+            borderRadius: "16px",
+            padding: "2rem 0",
+            overflow: "hidden"
+          }}>
+            <LogoLoop
+              logos={techStackLogos}
+              speed={80}
+              direction="left"
+              width="100%"
+              logoHeight={70}
+              gap={700}
+              pauseOnHover={true}
+              scaleOnHover={true}
+              fadeOut={true}
+              fadeOutColor="#030712"
+              ariaLabel="Tech stack logos"
+              className="[&_li:hover]:scale-100 transition-transform duration-300"
+              renderItem={(item) => (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "1.5rem",
+                    color: "#64748b",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#24f0c9";
+                    e.currentTarget.style.transform = "scale(1.15) translateY(-8px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "#64748b";
+                    e.currentTarget.style.transform = "scale(1) translateY(0)";
+                  }}
+                >
+                  {item.node}
+                  <span style={{ fontSize: "0.7rem", fontFamily: "'JetBrains Mono', monospace" }}>
+                    {item.title}
+                  </span>
+                </div>
+              )}
+            />
+          </div>
         </Reveal>
 
         <div
@@ -633,12 +705,28 @@ function SkillsSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(290px,1fr))",
-            gap: "1.5rem",
+            gap: "2.5rem",
           }}
         >
           {categories.map((cat, ci) => (
             <Reveal key={cat} delay={ci * 100}>
-              <Glass accent={CAT_ACCENT[cat]} style={{ padding: "2rem" }}>
+              <Glass
+                accent={CAT_ACCENT[cat]}
+                style={{
+                  padding: "2rem",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  transform: "scale(1)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.08) translateY(-6px)";
+                  e.currentTarget.style.boxShadow = `0 20px 40px rgba(36,240,201,0.15)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1) translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
