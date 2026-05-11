@@ -18,8 +18,8 @@ export function SkillBar({ name, level, category, inView, delay }) {
   }[category] || "linear-gradient(90deg,#06b6d4,#8b5cf6)";
 
   return (
-    <div className="mb-10">
-      <div className="flex justify-between mb-20">
+    <div className="mb-24 pb-4">
+      <div className="flex justify-between mb-4">
         <span className="text-slate-300 font-sans text-sm">
           {name}
         </span>

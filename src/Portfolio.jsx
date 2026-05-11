@@ -191,8 +191,9 @@ function Navbar({ active }) {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "0 clamp(1rem, 5vw, 3rem)",
-        background: scrolled ? "rgba(3,7,18,0.95)" : "transparent",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
+        background: scrolled ? "rgba(3,7,18,0.7)" : "rgba(3,7,18,0.4)",
+        backdropFilter: scrolled ? "blur(12px)" : "blur(6px)",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(255,255,255,0.03)",
         transition: "all 0.35s ease",
       }}
     >
@@ -283,6 +284,8 @@ function Navbar({ active }) {
               color: "#e2e8f0",
               fontSize: "1.4rem",
               lineHeight: 1,
+              transition: "transform 0.3s ease",
+              transform: open ? "rotate(90deg)" : "rotate(0deg)",
             }}
           >
             {open ? "✕" : "≡"}
@@ -297,15 +300,17 @@ function Navbar({ active }) {
             top: "64px",
             left: 0,
             right: 0,
-            background: "rgba(3,7,18,0.98)",
+            background: "rgba(3,7,18,0.8)",
+            backdropFilter: "blur(10px)",
             borderBottom: "1px solid rgba(255,255,255,0.07)",
             padding: "1.5rem clamp(1rem,5vw,3rem)",
             display: "flex",
             flexDirection: "column",
             gap: "0.25rem",
+            animation: "slideDown 0.3s ease forwards",
           }}
         >
-          {NAV_LINKS.map((l) => (
+          {NAV_LINKS.map((l, idx) => (
             <button
               key={l}
               onClick={() => go(l)}
@@ -319,6 +324,8 @@ function Navbar({ active }) {
                 textAlign: "left",
                 padding: "0.65rem 0",
                 borderBottom: "1px solid rgba(255,255,255,0.04)",
+                animation: `slideInLeft 0.4s ease ${idx * 50}ms forwards`,
+                opacity: 0,
               }}
             >
               {l}
@@ -647,18 +654,15 @@ function SkillsSection() {
   return (
     <section id="skills" style={{ padding: "9rem clamp(1rem,6vw,5rem)" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <Reveal style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <Reveal style={{ textAlign: "center", marginBottom: "3.5rem" }}>
           <SectionLabel number="02" id="skills" />
           <SectionTitle>My Tech Stack</SectionTitle>
         </Reveal>
 
-        <Reveal style={{ marginBottom: "5rem" }}>
+        <Reveal style={{ marginBottom: "6rem" }}>
           <div style={{
-            background: "rgba(255,255,255,0.02)",
-            border: "1px solid rgba(36,240,201,0.2)",
-            borderRadius: "16px",
-            padding: "2rem 0",
-            overflow: "hidden"
+            width: "100%",
+            overflow: "visible"
           }}>
             <LogoLoop
               logos={techStackLogos}
@@ -666,7 +670,7 @@ function SkillsSection() {
               direction="left"
               width="100%"
               logoHeight={70}
-              gap={700}
+              gap={280}
               pauseOnHover={true}
               scaleOnHover={true}
               fadeOut={true}
@@ -708,7 +712,7 @@ function SkillsSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(290px,1fr))",
-            gap: "2.5rem",
+            gap: "3.5rem",
           }}
         >
           {categories.map((cat, ci) => (
@@ -716,7 +720,7 @@ function SkillsSection() {
               <Glass
                 accent={CAT_ACCENT[cat]}
                 style={{
-                  padding: "2rem",
+                  padding: "2.5rem",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   transform: "scale(1)",
@@ -1409,6 +1413,7 @@ export default function Portfolio() {
       <style>{`
         @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
         @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
         @keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}

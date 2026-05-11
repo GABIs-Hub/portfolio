@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const BlobCursor = ({
@@ -22,8 +22,19 @@ const BlobCursor = ({
   zIndex = 100,
 }) => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const blobs = gsap.utils.toArray(".blob-cursor-blob");
 
     gsap.set(blobs, { xPercent: -50, yPercent: -50 });
@@ -47,6 +58,10 @@ const BlobCursor = ({
   }, [fastDuration, slowDuration, fastEase, slowEase]);
 
   const borderRadius = blobType === "circle" ? "50%" : "8px";
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <>
