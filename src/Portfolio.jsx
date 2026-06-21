@@ -420,9 +420,9 @@ function HeroSection() {
           <span style={{ color: "#f1f5f9" }}>Hey, </span>
           <span style={{ color: "#f1f5f9", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I'm </span>
           <span style={{ color: "#30AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>G</span>
-          <span style={{ color: "#40AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>A</span>
-          <span style={{ color: "#50AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>B</span>
-          <span style={{ color: "#60AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I</span>
+          <span style={{ color: "#50AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>A</span>
+          <span style={{ color: "#70AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>B</span>
+          <span style={{ color: "#90AB82", fontStyle: "italic", fontFamily: "'Georgia', serif" }}>I</span>
         </h1>
 
         <div
