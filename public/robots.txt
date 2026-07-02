@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gabis-worpsace.vercel.app/sitemap.xml
