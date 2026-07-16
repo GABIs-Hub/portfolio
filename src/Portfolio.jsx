@@ -74,6 +74,15 @@ const PROJECTS = [
     github: "#",
     live: "#",
   },
+  {
+    title: "Architect Portfolio",
+    desc: "Designed and developed a refined personal brand website for an architect to showcase expertise, identity, and professional services. Created a modern visual layout with responsive design, structured content sections, and performance-focused implementation to deliver a strong first impression.",
+    tags: ["Typescrit React", "Node.js", "Git / GitHub"],
+    accent: "#175810ff",
+    icon: "◙",
+    github: "#",
+    live: "https://favour-ogabi.vercel.app"
+  }
 ];
 
 const EXPERIENCE = [
@@ -87,8 +96,10 @@ const EXPERIENCE = [
   {
     period: "2024",
     role: "Frontend Developer",
-    org: "NACOS DU",
-    desc: "Worked on the project with other developers creating  — custom dashboard, navigation, and approval workflows using React, TypeScript, and Tailwind CSS.",
+    org: "NACOS DU Software Development Team",
+    desc: <p>
+              • Collaborate with developers to build responsive and user-friendly web applications. <br /> • Develop reusable UI components using modern frontend technologies. <br /> • Participate in Git-based development workflows and collaborative software development. <br /> • Assist in implementing new features while maintaining code quality and consistency. <br /> • Contribute to creating scalable interfaces with a focus on usability and performance.
+          </p>,
     accent: "#8b5cf6",
   },
   {
@@ -464,9 +475,11 @@ function HeroSection() {
             animation: "fadeUp 0.7s ease 0.45s both",
           }}
         >
-          A Software Engineering student and junior mobile developer from Nigeria — crafting
-          cross-platform apps with Flutter, React Native, and modern web tech.
-          Building the future, one commit at a time.
+          Flutter Developer and Frontend Developer with practical experience building cross-platform mobile applications and
+          modern web interfaces using Flutter, Next.js, TypeScript, and Tailwind CSS. Focused on creating clean, responsive,
+          and user-friendly digital products with solid structure and good performance.
+          Comfortable working in collaborative environments, integrating backend services, and turning ideas into functional
+          applications. Continuously improving technical skills through real projects, problem-solving, and consistent practice.
         </p>
 
         <div
