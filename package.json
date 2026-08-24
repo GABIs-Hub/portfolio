@@ -1,34 +1,29 @@
 {
   "name": "portfolio-site",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint src next.config.ts"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "postcss": "^8.5.14",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.1.6",
     "tailwindcss": "^4.3.0",
-    "vite": "^8.0.10"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@base-ui/react": "^1.4.1",
-    "@emailjs/browser": "^4.4.1",
-    "@fontsource-variable/geist": "^5.2.8",
-    "@tailwindcss/vite": "^4.3.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.14.0",
+    "@tailwindcss/postcss": "^4.3.0",
+    "framer-motion": "^12.0.0",
+    "lucide-react": "^0.468.0",
+    "next": "^16.1.6",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-icons": "^5.6.0",
-    "shadcn": "^4.7.0",
-    "tailwind-merge": "^3.6.0",
-    "tw-animate-css": "^1.4.0"
+    "react-dom": "^19.2.5"
   }
 }
