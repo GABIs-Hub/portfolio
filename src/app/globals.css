@@ -765,4 +765,131 @@ dd {
   font-weight: 500;
 }
 
-/* @@PART4B@@ */
+/* Capabilities */
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 2.5rem;
+}
+
+.capability {
+  display: grid;
+  align-content: start;
+  gap: 0.85rem;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.capability-icon {
+  color: var(--accent);
+}
+
+.capability h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.capability p {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+}
+
+/* Contact */
+
+.contact-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.contact-panel h2 {
+  max-width: 18ch;
+  margin-top: 1rem;
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.contact-copy {
+  max-width: 52ch;
+  margin-top: 1.25rem;
+  color: var(--fg-muted);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+.contact-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.contact-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 56px;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  font-size: var(--text-sm);
+  transition: color var(--duration-fast) ease;
+}
+
+.contact-list a span:first-child {
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-list a span:last-child {
+  text-align: right;
+}
+
+.contact-list a:hover {
+  color: var(--accent);
+}
+
+/* Footer */
+
+.site-footer {
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  color: var(--fg-subtle);
+  font-size: var(--text-sm);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-links a,
+.footer-top {
+  padding-block: 0.6rem;
+  transition: color var(--duration-fast) ease;
+}
+
+.footer-links a:hover,
+.footer-top:hover {
+  color: var(--fg);
+}
+
+/* @@PART5@@ */
