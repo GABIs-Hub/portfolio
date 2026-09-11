@@ -30,6 +30,10 @@ npm run build
 - `src/components` contains small UI pieces. Only `mobile-nav`, `cursor-blob`, and `reveal-observer` run on the client.
 - `docs/technical-architecture.md` records decisions and extension points.
 
+## CV download
+
+Every "Download CV" link (header, hero, mobile menu, contact list) points at `public/cv/ogabi-david-cv.pdf`. Add your PDF at that exact path and the links work with no code change. To change the path or the downloaded file name, edit `cv` in `src/lib/site.ts`. Keep the PDF reasonably small (under 1 MB) and export it with text, not as a scanned image, so recruiters' systems can parse it.
+
 ## Content rules
 
 Everything on the site should be verifiable. Project descriptions, roles, and status are written from what the projects actually do; no user counts, clients, or outcomes are shown unless they are real.

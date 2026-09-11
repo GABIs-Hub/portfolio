@@ -1,10 +1,11 @@
-import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, Mail } from "lucide-react";
 
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
 import {
   capabilities,
   contactLinks,
+  cv,
   emailHref,
   experience,
   heroFacts,
@@ -50,7 +51,15 @@ export default function Home() {
               <a className="button button-primary" href="#work">
                 Selected work <ArrowRight size={16} aria-hidden="true" />
               </a>
-              <a className="button button-secondary" href={emailHref}>
+              <a
+                className="button button-secondary"
+                href={cv.href}
+                download={cv.fileName}
+                type="application/pdf"
+              >
+                {cv.label} <Download size={16} aria-hidden="true" />
+              </a>
+              <a className="text-link hero-email" href={emailHref}>
                 Email me <Mail size={16} aria-hidden="true" />
               </a>
             </div>
@@ -282,6 +291,7 @@ export default function Home() {
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noreferrer" : undefined}
+                    download={link.download}
                   >
                     <span>{link.label}</span>
                     <span>{link.value}</span>

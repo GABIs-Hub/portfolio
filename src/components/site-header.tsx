@@ -1,5 +1,5 @@
 import { MobileNav } from "@/components/mobile-nav";
-import { emailHref, navItems, siteConfig } from "@/lib/site";
+import { cv, navItems, siteConfig } from "@/lib/site";
 
 export function SiteHeader() {
   return (
@@ -19,10 +19,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="header-actions">
-          <a className="button button-secondary button-small header-cta" href={emailHref}>
-            Email me
+          <a
+            className="button button-secondary button-small header-cta"
+            href={cv.href}
+            download={cv.fileName}
+            type="application/pdf"
+          >
+            {cv.label}
           </a>
-          <MobileNav items={navItems} />
+          <MobileNav items={navItems} cv={cv} />
         </div>
       </div>
     </header>

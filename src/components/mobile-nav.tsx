@@ -7,9 +7,10 @@ import type { NavItem } from "@/lib/site";
 
 type MobileNavProps = {
   items: NavItem[];
+  cv: { href: string; fileName: string; label: string };
 };
 
-export function MobileNav({ items }: MobileNavProps) {
+export function MobileNav({ items, cv }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
@@ -55,6 +56,15 @@ export function MobileNav({ items }: MobileNavProps) {
             {item.label}
           </a>
         ))}
+        <a
+          className="mobile-nav-cv"
+          href={cv.href}
+          download={cv.fileName}
+          type="application/pdf"
+          onClick={() => setOpen(false)}
+        >
+          {cv.label}
+        </a>
       </nav>
     </div>
   );

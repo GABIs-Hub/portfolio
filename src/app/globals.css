@@ -391,6 +391,14 @@ dd {
   color: var(--fg);
 }
 
+.mobile-nav-panel .mobile-nav-cv {
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  color: var(--fg);
+  font-weight: 600;
+}
+
 /* Hero */
 
 .hero {
@@ -452,8 +460,13 @@ dd {
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.75rem;
   margin-top: 2.25rem;
+}
+
+.hero-email {
+  margin-left: 0.25rem;
 }
 
 .hero-facts {
@@ -1057,6 +1070,11 @@ dd {
   .hero-actions .button,
   .contact-actions .button {
     flex: 1 1 auto;
+  }
+
+  .hero-email {
+    flex-basis: 100%;
+    margin-left: 0;
   }
 
   .case-details {

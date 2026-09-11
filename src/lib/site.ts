@@ -57,6 +57,7 @@ export type ContactLink = {
   value: string;
   href: string;
   external?: boolean;
+  download?: string;
 };
 
 export type Social = {
@@ -97,6 +98,16 @@ export const siteConfig = {
 };
 
 export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Project enquiry")}`;
+
+/**
+ * The CV is served as a static file from `public/cv/`.
+ * Drop the PDF at `public/cv/ogabi-david-cv.pdf` and every CV link on the site picks it up.
+ */
+export const cv = {
+  href: "/cv/ogabi-david-cv.pdf",
+  fileName: "Ogabi-David-CV.pdf",
+  label: "Download CV",
+};
 
 export const navItems: NavItem[] = [
   { label: "Work", href: "#work" },
@@ -279,6 +290,7 @@ export const experience: Experience[] = [
 
 export const contactLinks: ContactLink[] = [
   { label: "Email", value: siteConfig.email, href: emailHref },
+  { label: "CV", value: "Download PDF", href: cv.href, download: cv.fileName },
   { label: "WhatsApp", value: "Message on WhatsApp", href: siteConfig.whatsapp, external: true },
   { label: "LinkedIn", value: "david-ogabi", href: siteConfig.linkedin, external: true },
   { label: "GitHub", value: "GABIs-Hub", href: siteConfig.github, external: true },
