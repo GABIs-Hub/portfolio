@@ -1,15 +1,16 @@
 type SectionHeadingProps = {
+  id: string;
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
 };
 
-export function SectionHeading({ eyebrow, title, description }: SectionHeadingProps) {
+export function SectionHeading({ id, eyebrow, title, description }: SectionHeadingProps) {
   return (
-    <div className="section-heading">
+    <div className="section-heading" data-reveal>
       <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      <p>{description}</p>
+      <h2 id={id}>{title}</h2>
+      {description ? <p className="section-description">{description}</p> : null}
     </div>
   );
 }
