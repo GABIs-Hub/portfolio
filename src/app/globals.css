@@ -391,4 +391,238 @@ dd {
   color: var(--fg);
 }
 
-/* @@PART3@@ */
+/* Hero */
+
+.hero {
+  padding-top: clamp(4rem, 9vw, 7.5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+.status-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.hero h1 {
+  display: grid;
+  gap: 0.1em;
+  max-width: 16ch;
+  margin-top: 1.5rem;
+  font-size: var(--text-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+.hero-role {
+  color: var(--fg-muted);
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.hero-stack {
+  margin-top: 1.25rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+}
+
+.hero-lede {
+  max-width: 60ch;
+  margin-top: 1.5rem;
+  color: var(--fg-muted);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+.hero-actions,
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.hero-fact {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.25rem 1.25rem 1.25rem 0;
+}
+
+.hero-fact + .hero-fact {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--line);
+}
+
+.hero-fact dt {
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-fact dd {
+  color: var(--fg);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* Case studies */
+
+.case-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.case-study {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-meta {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+}
+
+.case-index {
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.case-study h3 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.case-category {
+  margin-top: 0.4rem;
+  color: var(--fg-subtle);
+  font-size: var(--text-sm);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fg-subtle);
+}
+
+.status[data-status="Live"]::before {
+  background: var(--accent);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--fg-muted);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.case-body {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+}
+
+.case-summary {
+  max-width: 62ch;
+  color: var(--fg);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.case-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.case-details > div {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.case-details dt {
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-details dd {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+}
+
+.case-notes {
+  grid-column: 1 / -1;
+}
+
+.case-notes ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.case-notes li::marker {
+  color: var(--accent);
+}
+
+/* @@PART4@@ */
