@@ -1,29 +1,37 @@
-import {
-  BriefcaseBusiness,
-  Code2,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Smartphone,
-  Sparkles,
-  Workflow,
-} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import {
+  Code2,
+  Layers,
+  PenTool,
+  Server,
+  Smartphone,
+  TabletSmartphone,
+} from "lucide-react";
 
 export type NavItem = {
   label: string;
   href: `#${string}`;
 };
 
+export type ProjectStatus = "Live" | "In progress" | "Private";
+
 export type Project = {
+  slug: string;
   title: string;
+  category: string;
   summary: string;
-  impact: string;
-  tags: string[];
-  status: "Live" | "In progress" | "Private";
+  problem: string;
+  role: string;
+  notes: string[];
+  stack: string[];
+  status: ProjectStatus;
   href?: string;
+};
+
+export type SkillGroup = {
+  title: string;
+  items: string[];
+  primary?: boolean;
 };
 
 export type Capability = {
@@ -39,110 +47,213 @@ export type Experience = {
   points: string[];
 };
 
+export type Fact = {
+  label: string;
+  value: string;
+};
+
+export type ContactLink = {
+  label: string;
+  value: string;
+  href: string;
+  external?: boolean;
+};
+
+export type Social = {
+  label: string;
+  href: string;
+};
+
 export const siteConfig = {
   name: "Ogabi David",
+  nickname: "Gabi",
   brand: "GABI",
-  role: "Frontend and mobile developer",
+  siteName: "GABI's Workspace",
+  role: "Mobile Developer",
+  tagline: "Flutter · React Native · Kotlin",
   location: "Nigeria",
+  timezone: "WAT (UTC+1)",
   email: "ogabidavid16@gmail.com",
   url: "https://gabis-workspace.vercel.app",
-  repo: "https://github.com/GABIs-Hub",
+  github: "https://github.com/GABIs-Hub",
   linkedin: "https://linkedin.com/in/david-ogabi-b77a2a31a",
   whatsapp: "https://wa.me/2349027876679",
+  googleSiteVerification: "LEwvAXqy9PxUPX7lqUi6YSK4Vu0vqK5n3TUWKKH5ugk",
+  title: "Ogabi David · Mobile Developer | Flutter, React Native, Kotlin",
   description:
-    "Ogabi David builds responsive web interfaces and cross-platform mobile applications with React, Next.js, TypeScript, Flutter, Kotlin, and Firebase.",
+    "Portfolio of Ogabi David (Gabi), a mobile developer in Nigeria building cross-platform apps with Flutter, React Native, and Kotlin, and web interfaces with React and Next.js.",
+  keywords: [
+    "Ogabi David",
+    "Gabi",
+    "Gabi's Workspace",
+    "Mobile Developer",
+    "Flutter Developer",
+    "React Native Developer",
+    "Android Developer",
+    "Kotlin Developer",
+    "Web Developer",
+    "Nigeria",
+  ],
 };
+
+export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Project enquiry")}`;
 
 export const navItems: NavItem[] = [
   { label: "Work", href: "#work" },
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Experience", href: "#experience" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
-export const proofPoints = [
-  "Mobile-first product engineering",
-  "React, Next.js, TypeScript, and Tailwind CSS",
-  "Flutter, Kotlin, Firebase, and Supabase",
-  "Clean delivery for students, creators, and small businesses",
-];
-
-export const capabilities: Capability[] = [
-  {
-    title: "Cross-platform apps",
-    description:
-      "Designing Flutter and Android-first product flows with clear state, useful analytics, and responsive screens.",
-    icon: Smartphone,
-  },
-  {
-    title: "Frontend systems",
-    description:
-      "Building React and Next.js interfaces that are accessible, fast to scan, and easy for another engineer to extend.",
-    icon: Code2,
-  },
-  {
-    title: "Product execution",
-    description:
-      "Turning ambiguous ideas into scoped releases with practical content structure, deployment, and iteration paths.",
-    icon: Workflow,
-  },
-  {
-    title: "Developer tools",
-    description:
-      "Exploring tools that reduce debugging friction, including dependency analysis and stack-trace interpretation.",
-    icon: Sparkles,
-  },
+export const heroFacts: Fact[] = [
+  { label: "Focus", value: "Mobile apps with Flutter, React Native, and Kotlin" },
+  { label: "Also", value: "Web interfaces with React, Next.js, and TypeScript" },
+  { label: "Based in", value: `${siteConfig.location} · ${siteConfig.timezone}` },
+  { label: "Currently", value: "Building BizLedger and a student budget tracker in Flutter" },
 ];
 
 export const projects: Project[] = [
   {
-    title: "DepSense API",
-    summary:
-      "A developer-focused dependency analyzer and error decoder for package manifests and stack traces.",
-    impact:
-      "Built around the practical workflow of understanding dependency risk and translating failures into plain-language fixes.",
-    tags: ["API", "Developer tools", "Node.js"],
-    status: "In progress",
-  },
-  {
-    title: "BizLedger",
-    summary:
-      "A cross-platform ledger and finance tracking app for small businesses.",
-    impact:
-      "Focuses on simple transaction entry, clean reporting, and business-friendly financial visibility across devices.",
-    tags: ["Flutter", "Finance", "Mobile"],
-    status: "In progress",
-  },
-  {
+    slug: "student-budget-tracker",
     title: "Student Budget Tracker",
+    category: "Mobile · Personal finance",
     summary:
-      "A student expense tracker for daily, weekly, monthly, and semester-level budget views.",
-    impact:
-      "Designed to make spending patterns easier to understand across common student purchase categories.",
-    tags: ["Flutter", "Firebase", "Kotlin"],
+      "An expense tracker built for university students, with daily, weekly, monthly, and semester budget views.",
+    problem:
+      "Student spending is irregular and concentrated in a few places, mostly restaurants and supermarkets. Generic finance apps do not frame a budget around a semester, which is the period that actually matters to a student.",
+    role: "Design and development",
+    notes: [
+      "Budget views at daily, weekly, monthly, and semester granularity, so the same transactions can be read at whichever level matters at the time.",
+      "Spending grouped by common student categories, including restaurants and supermarkets, with analytics on where money goes.",
+      "Built in Flutter with Firebase as the backend, and Kotlin for the Android layer.",
+    ],
+    stack: ["Flutter", "Dart", "Firebase", "Kotlin"],
     status: "In progress",
   },
   {
-    title: "Architect Portfolio",
+    slug: "bizledger",
+    title: "BizLedger",
+    category: "Mobile · Small business finance",
     summary:
-      "A responsive personal brand site for an architect, built to present services, expertise, and visual identity clearly.",
-    impact:
-      "Delivered a focused, performance-minded portfolio with structured sections and a polished first impression.",
-    tags: ["React", "TypeScript", "Vercel"],
+      "A cross-platform ledger and accounting app that gives small businesses clear financial tracking across devices.",
+    problem:
+      "Small businesses often keep records in notebooks or spreadsheets that do not travel well between a phone and a laptop. BizLedger aims to make recording a transaction, and reading the picture that results, simple on any device.",
+    role: "Design and development",
+    notes: [
+      "Simple transaction entry as the core loop, so record keeping stays fast enough to actually happen.",
+      "Reporting focused on business-friendly visibility rather than accounting jargon.",
+      "A single Flutter codebase so the same ledger works across devices.",
+    ],
+    stack: ["Flutter", "Dart"],
+    status: "In progress",
+  },
+  {
+    slug: "architect-portfolio",
+    title: "Architect Portfolio",
+    category: "Web · Personal brand site",
+    summary:
+      "A personal brand website for an architect, presenting services, expertise, and visual identity.",
+    problem:
+      "An architect needs a site that presents their work and services with the same care they put into their own designs, and that loads quickly and reads well on a phone.",
+    role: "Design and development",
+    notes: [
+      "Responsive layout with structured content sections for services, expertise, and identity.",
+      "Performance-minded implementation focused on a strong first impression.",
+      "Deployed on Vercel.",
+    ],
+    stack: ["React", "TypeScript", "Vercel"],
     status: "Live",
     href: "https://favour-ogabi.vercel.app",
+  },
+  {
+    slug: "depsense-api",
+    title: "DepSense API",
+    category: "Developer tooling · API",
+    summary:
+      "A developer-focused API with a dependency analyser and an error decoder that turns stack traces into plain-English fixes.",
+    problem:
+      "Dependency problems and cryptic stack traces slow developers down in every ecosystem. DepSense reads the manifests developers already have and explains failures in language that points at a fix.",
+    role: "Design and development",
+    notes: [
+      "Dependency analyser accepts package.json, pubspec.yaml, and build.gradle, covering the npm, Dart, and Android ecosystems in one tool.",
+      "Error decoder translates stack traces into plain-English explanations and suggested fixes.",
+      "Implemented as a Node.js API.",
+    ],
+    stack: ["Node.js", "REST API"],
+    status: "In progress",
+  },
+];
+
+export const skillGroups: SkillGroup[] = [
+  {
+    title: "Mobile",
+    primary: true,
+    items: ["Flutter", "Dart", "React Native", "Kotlin", "Jetpack Compose", "Android SDK"],
+  },
+  {
+    title: "Web",
+    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Vite"],
+  },
+  {
+    title: "Backend and data",
+    items: ["Firebase", "Supabase", "Node.js", "REST APIs"],
+  },
+  {
+    title: "Tooling and design",
+    items: ["Git and GitHub", "Android Studio", "Gradle", "Figma", "VS Code"],
+  },
+];
+
+export const learning = ["Swift", "SwiftUI"];
+
+export const capabilities: Capability[] = [
+  {
+    title: "Flutter development",
+    description:
+      "Cross-platform apps from a single Dart codebase, with attention to state, navigation, and screens that adapt to the device.",
+    icon: Smartphone,
+  },
+  {
+    title: "React Native development",
+    description:
+      "Mobile apps for teams already invested in JavaScript and React, sharing patterns with the web.",
+    icon: TabletSmartphone,
+  },
+  {
+    title: "Android development",
+    description:
+      "Native Android work with Kotlin and Jetpack Compose, including platform-specific code inside cross-platform apps.",
+    icon: Layers,
+  },
+  {
+    title: "Web development",
+    description:
+      "Responsive, accessible interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
+    icon: Code2,
+  },
+  {
+    title: "UI implementation",
+    description:
+      "Turning Figma designs into consistent, responsive screens on mobile and web.",
+    icon: PenTool,
+  },
+  {
+    title: "Backend and API integration",
+    description:
+      "Connecting apps to Firebase, Supabase, and Node.js services.",
+    icon: Server,
   },
 ];
 
 export const experience: Experience[] = [
   {
-    period: "2024 - Present",
+    period: "2024 – Present",
     role: "Junior Mobile Developer",
-    organization: "Self-directed / freelance",
+    organization: "Independent and freelance",
     points: [
-      "Builds cross-platform mobile apps with Flutter and React Native.",
-      "Explores native Android delivery with Kotlin and Jetpack Compose.",
-      "Publishes practical project work through GitHub-driven development.",
+      "Building cross-platform mobile apps with Flutter and React Native.",
+      "Exploring native Android with Kotlin and Jetpack Compose.",
+      "Publishing project work through GitHub-driven development.",
     ],
   },
   {
@@ -152,31 +263,29 @@ export const experience: Experience[] = [
     points: [
       "Collaborated on responsive web interfaces and reusable UI components.",
       "Worked within Git-based development workflows.",
-      "Contributed implementation support while keeping usability and performance in view.",
+      "Helped implement features while keeping usability and performance in view.",
     ],
   },
   {
-    period: "2023 - Present",
+    period: "2023 – Present",
     role: "Software Engineering Student",
     organization: "University",
     points: [
-      "Studies software engineering fundamentals while shipping real projects.",
-      "Applies data structures, programming principles, architecture, and product thinking through practice.",
+      "Studying software engineering fundamentals while shipping real projects in parallel.",
+      "Coursework spans data structures, programming principles, system design, and software architecture.",
     ],
   },
 ];
 
-export const socials = [
-  { label: "GitHub", href: siteConfig.repo, icon: Github },
-  { label: "LinkedIn", href: siteConfig.linkedin, icon: Linkedin },
-  { label: "WhatsApp", href: siteConfig.whatsapp, icon: MessageCircle },
-  { label: "Email", href: `mailto:${siteConfig.email}`, icon: Mail },
+export const contactLinks: ContactLink[] = [
+  { label: "Email", value: siteConfig.email, href: emailHref },
+  { label: "WhatsApp", value: "Message on WhatsApp", href: siteConfig.whatsapp, external: true },
+  { label: "LinkedIn", value: "david-ogabi", href: siteConfig.linkedin, external: true },
+  { label: "GitHub", value: "GABIs-Hub", href: siteConfig.github, external: true },
 ];
 
-export const highlights = [
-  { label: "Primary stack", value: "Next.js, React, TypeScript, Flutter" },
-  { label: "Product focus", value: "Student tools, finance workflows, personal brands" },
-  { label: "Delivery mode", value: "Accessible UI, clean structure, Vercel deployment" },
-  { label: "Location", value: siteConfig.location, icon: MapPin },
-  { label: "Availability", value: "Open to frontend and mobile opportunities", icon: BriefcaseBusiness },
+export const socials: Social[] = [
+  { label: "GitHub", href: siteConfig.github },
+  { label: "LinkedIn", href: siteConfig.linkedin },
+  { label: "WhatsApp", href: siteConfig.whatsapp },
 ];
