@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import {
   capabilities,
   experience,
-  highlights,
+  heroFacts,
   proofPoints,
   projects,
   siteConfig,
@@ -43,18 +43,12 @@ export default function Home() {
 
             <aside className="hero-visual" aria-label="Portfolio summary">
               <div className="hero-meta">
-                {highlights.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div className="meta-item" key={item.label}>
-                      <span>{item.label}</span>
-                      <span>
-                        {Icon ? <Icon size={16} aria-hidden="true" /> : null}
-                        {item.value}
-                      </span>
-                    </div>
-                  );
-                })}
+                {heroFacts.map((item) => (
+                  <div className="meta-item" key={item.label}>
+                    <span>{item.label}</span>
+                    <span>{item.value}</span>
+                  </div>
+                ))}
               </div>
               <div className="portrait-frame">
                 <Image
@@ -100,12 +94,13 @@ export default function Home() {
                   ) : null}
                 </div>
                 <div>
+                  <p className="eyebrow">{project.category}</p>
                   <h3>{project.title}</h3>
                   <p>{project.summary}</p>
                 </div>
-                <p>{project.impact}</p>
+                <p>{project.problem}</p>
                 <footer>
-                  {project.tags.map((tag) => (
+                  {project.stack.map((tag) => (
                     <span className="tag" key={tag}>
                       {tag}
                     </span>
@@ -186,21 +181,18 @@ export default function Home() {
                 <a className="button primary" href={`mailto:${siteConfig.email}`}>
                   Email me <Mail size={18} aria-hidden="true" />
                 </a>
-                <a className="button secondary" href={siteConfig.repo} target="_blank" rel="noreferrer">
+                <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">
                   GitHub <ArrowUpRight size={18} aria-hidden="true" />
                 </a>
               </div>
             </div>
 
             <div className="social-row" aria-label="Social links">
-              {socials.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label}>
-                    <Icon size={20} aria-hidden="true" />
-                  </a>
-                );
-              })}
+              {socials.map((social) => (
+                <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label}>
+                  {social.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
