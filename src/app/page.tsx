@@ -9,11 +9,17 @@ import {
   capabilities,
   experience,
   heroFacts,
-  proofPoints,
   projects,
   siteConfig,
   socials,
 } from "@/lib/site";
+
+const proofPoints = [
+  "Flutter · Dart · Kotlin",
+  "React · Next.js · TypeScript",
+  "Firebase · Supabase · Node.js",
+  "Git · GitHub · Android Studio",
+];
 
 export default function Home() {
   return (
@@ -181,7 +187,12 @@ export default function Home() {
                 <a className="button primary" href={`mailto:${siteConfig.email}`}>
                   Email me <Mail size={18} aria-hidden="true" />
                 </a>
-                <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">
+                <a
+                  className="button secondary"
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   GitHub <ArrowUpRight size={18} aria-hidden="true" />
                 </a>
               </div>
@@ -189,7 +200,13 @@ export default function Home() {
 
             <div className="social-row" aria-label="Social links">
               {socials.map((social) => (
-                <a key={social.label} href={social.href} target="_blank" rel="noreferrer" aria-label={social.label}>
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                >
                   {social.label}
                 </a>
               ))}
