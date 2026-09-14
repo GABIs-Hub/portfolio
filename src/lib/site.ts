@@ -74,7 +74,7 @@ export const siteConfig = {
   tagline: "Flutter · React Native · Kotlin",
   location: "Nigeria",
   timezone: "WAT (UTC+1)",
-  email: "ogabidavid16@gmail.com",
+  email: "gabisworkspace@outlook.com",
   url: "https://gabis-workspace.vercel.app",
   github: "https://github.com/GABIs-Hub",
   linkedin: "https://linkedin.com/in/david-ogabi-b77a2a31a",

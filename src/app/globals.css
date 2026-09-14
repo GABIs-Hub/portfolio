@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 /* Design tokens */

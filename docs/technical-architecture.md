@@ -10,7 +10,7 @@ The original Vite implementation was a single browser-heavy component with inlin
 
 - Server Components by default. The only client islands are `MobileNav`, `CursorBlob`, and `RevealObserver`.
 - In-page navigation uses plain anchors with `scroll-padding-top`, not `next/link`, to avoid shipping router code for hash links.
-- Space Grotesk is loaded through `next/font/google`, which self-hosts the font at build time. Builds need network access to fetch it once; there is no runtime request.
+- Quicksand is loaded through `next/font/google`, which self-hosts the font at build time. Builds need network access to fetch it once; there is no runtime request.
 - Design tokens live as CSS custom properties in `globals.css` (surfaces, text, accent, type scale, spacing, radius, motion). Components reference tokens rather than raw values.
 - The cursor is a single soft blob plus a dot, moved with `translate3d` in a `requestAnimationFrame` loop that stops when settled. It renders only for `pointer: fine` and `hover: hover` devices with no reduced-motion preference, and uses no filters or backdrop blur.
 - Scroll reveals are CSS transitions toggled by one `IntersectionObserver`. Elements already in the viewport at hydration are marked visible before the transition class is enabled, so nothing flashes. Without JavaScript, or with reduced motion, all content is simply visible.

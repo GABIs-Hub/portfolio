@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Quicksand } from "next/font/google";
 
 import { CursorBlob } from "@/components/cursor-blob";
 import { RevealObserver } from "@/components/reveal-observer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const quickSand = Quicksand({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-quicksand",
 });
 
 export const metadata: Metadata = {
@@ -98,7 +98,7 @@ const personSchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
+    <html lang="en" className={quickSand.variable}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

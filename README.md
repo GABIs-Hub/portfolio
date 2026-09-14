@@ -8,7 +8,7 @@ Personal portfolio for Ogabi David (Gabi), a mobile developer working with Flutt
 - React 19
 - TypeScript (strict)
 - Tailwind CSS v4 (preflight and utilities) with hand-written, token-based CSS
-- Space Grotesk via `next/font` (self-hosted at build time)
+- Quicksand via `next/font` (self-hosted at build time)
 - Lucide React icons
 - Vercel-ready metadata, sitemap, robots, and JSON-LD
 
