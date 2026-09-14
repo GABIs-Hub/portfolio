@@ -1,29 +1,43 @@
 # Portfolio Site
 
-Production-oriented personal portfolio for Ogabi David, rebuilt from a Vite React app into a strict Next.js App Router project.
+Personal portfolio for Ogabi David (Gabi), a mobile developer working with Flutter, React Native, and Kotlin, with web development as a second capability.
 
 ## Stack
 
-- Next.js 16 App Router
+- Next.js 16 App Router with React Server Components
 - React 19
-- TypeScript
-- Tailwind CSS v4
+- TypeScript (strict)
+- Tailwind CSS v4 (preflight and utilities) with hand-written, token-based CSS
+- Space Grotesk via `next/font` (self-hosted at build time)
 - Lucide React icons
-- Vercel-ready metadata, sitemap, and robots routes
+- Vercel-ready metadata, sitemap, robots, and JSON-LD
 
 ## Scripts
 
 ```bash
-npm.cmd run dev
-npm.cmd run lint
-npm.cmd run build
+npm install
+npm run dev
+npm run lint
+npm run build
 ```
 
-## Architecture Notes
+## Architecture
 
-- `src/app/page.tsx` contains the server-rendered homepage composition.
-- `src/lib/site.ts` contains the typed portfolio content source.
-- `src/components` contains small reusable UI sections.
-- `docs/technical-architecture.md` records the current architecture and future CMS/contact extension points.
+- `src/app/layout.tsx` sets metadata, the font, structured data, and the two client islands (cursor and scroll reveal).
+- `src/app/page.tsx` is the server-rendered homepage: hero, selected work, about, skills, capabilities, contact.
+- `src/app/globals.css` holds the design tokens (colour, type scale, spacing, radius, motion) and all component styles.
+- `src/lib/site.ts` is the single typed content source. Edit copy, projects, and links here.
+- `src/components` contains small UI pieces. Only `mobile-nav`, `cursor-blob`, and `reveal-observer` run on the client.
+- `docs/technical-architecture.md` records decisions and extension points.
 
-The contact form from the previous Vite implementation was removed because it initialized EmailJS credentials in browser code. The first release uses direct email and social links; a server-side contact flow can be added once provider credentials are available.
+## CV download
+
+Every "Download CV" link (header, hero, mobile menu, contact list) points at `public/cv/ogabi-david-cv.pdf`. Add your PDF at that exact path and the links work with no code change. To change the path or the downloaded file name, edit `cv` in `src/lib/site.ts`. Keep the PDF reasonably small (under 1 MB) and export it with text, not as a scanned image, so recruiters' systems can parse it.
+
+## Content rules
+
+Everything on the site should be verifiable. Project descriptions, roles, and status are written from what the projects actually do; no user counts, clients, or outcomes are shown unless they are real.
+
+## Contact
+
+The contact section uses direct email, WhatsApp, and LinkedIn links. A server-side contact form can be added later once a mail provider is configured; credentials must never live in client code.

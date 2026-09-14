@@ -1,19 +1,12 @@
-import js from "@eslint/js";
 import { defineConfig, globalIgnores } from "eslint/config";
-import tseslint from "typescript-eslint";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 
 export default defineConfig([
-  globalIgnores([".next/**", "node_modules/**", "dist/**", "dist-ssr/**", "out/**"]),
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...nextVitals,
+  ...nextTs,
   {
     files: ["src/**/*.{ts,tsx}"],
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
     rules: {
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-unused-vars": [
@@ -25,8 +18,5 @@ export default defineConfig([
       ],
     },
   },
-  {
-    files: ["next.config.ts"],
-    rules: {},
-  },
+  globalIgnores([".next/**", "node_modules/**", "out/**", "next-env.d.ts"]),
 ]);
