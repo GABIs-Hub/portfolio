@@ -25,6 +25,7 @@ npm run build
 
 - `src/app/layout.tsx` sets metadata, the font, structured data, and the two client islands (cursor and scroll reveal).
 - `src/app/page.tsx` is the server-rendered homepage: hero, selected work, about, skills, capabilities, contact.
+- `src/app/work/[slug]/page.tsx` renders typed static case-study pages for selected projects.
 - `src/app/globals.css` holds the design tokens (colour, type scale, spacing, radius, motion) and all component styles.
 - `src/lib/site.ts` is the single typed content source. Edit copy, projects, and links here.
 - `src/components` contains small UI pieces. Only `mobile-nav`, `cursor-blob`, and `reveal-observer` run on the client.
@@ -32,7 +33,7 @@ npm run build
 
 ## CV download
 
-Every "Download CV" link (header, hero, mobile menu, contact list) points at `public/cv/ogabi-david-cv.pdf`. Add your PDF at that exact path and the links work with no code change. To change the path or the downloaded file name, edit `cv` in `src/lib/site.ts`. Keep the PDF reasonably small (under 1 MB) and export it with text, not as a scanned image, so recruiters' systems can parse it.
+Every "Download CV" link (header, hero, mobile menu, contact list) points at the verified PDF in `public/cv/Ogabi_David_Upgraded_CV.pdf`. To change the path or the downloaded file name, edit `cv` in `src/lib/site.ts`. Keep the PDF reasonably small (under 1 MB) and export it with text, not as a scanned image, so recruiters' systems can parse it.
 
 ## Content rules
 
@@ -41,3 +42,7 @@ Everything on the site should be verifiable. Project descriptions, roles, and st
 ## Contact
 
 The contact section uses direct email, WhatsApp, and LinkedIn links. A server-side contact form can be added later once a mail provider is configured; credentials must never live in client code.
+
+## SEO routes
+
+`src/app/robots.ts` and `src/app/sitemap.ts` generate the canonical `robots.txt` and `sitemap.xml` routes from `siteConfig.url`, including every statically generated project case study.

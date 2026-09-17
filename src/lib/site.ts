@@ -5,7 +5,6 @@ import {
   PenTool,
   Server,
   Smartphone,
-  TabletSmartphone,
 } from "lucide-react";
 
 export type NavItem = {
@@ -23,6 +22,7 @@ export type Project = {
   problem: string;
   role: string;
   notes: string[];
+  impact: string[];
   stack: string[];
   status: ProjectStatus;
   href?: string;
@@ -70,8 +70,8 @@ export const siteConfig = {
   nickname: "Gabi",
   brand: "GABI",
   siteName: "GABI's Workspace",
-  role: "Mobile Developer",
-  tagline: "Flutter · React Native · Kotlin",
+  role: "Software Engineer | Mobile & Full-Stack Developer",
+  tagline: "Flutter first · React · Next.js · TypeScript",
   location: "Nigeria",
   timezone: "WAT (UTC+1)",
   email: "gabisworkspace@outlook.com",
@@ -80,19 +80,19 @@ export const siteConfig = {
   linkedin: "https://linkedin.com/in/david-ogabi-b77a2a31a",
   whatsapp: "https://wa.me/2349027876679",
   googleSiteVerification: "LEwvAXqy9PxUPX7lqUi6YSK4Vu0vqK5n3TUWKKH5ugk",
-  title: "Ogabi David · Mobile Developer | Flutter, React Native, Kotlin",
+  title: "Ogabi David · Software Engineer | Flutter, Mobile & Full-Stack",
   description:
-    "Portfolio of Ogabi David (Gabi), a mobile developer in Nigeria building cross-platform apps with Flutter, React Native, and Kotlin, and web interfaces with React and Next.js.",
+    "Portfolio of Ogabi David (Gabi), a software engineer in Nigeria building Flutter mobile products and full-stack applications with React, Next.js, TypeScript, and PostgreSQL.",
   keywords: [
     "Ogabi David",
     "Gabi",
     "Gabi's Workspace",
-    "Mobile Developer",
+    "Software Engineer",
     "Flutter Developer",
-    "React Native Developer",
-    "Android Developer",
-    "Kotlin Developer",
-    "Web Developer",
+    "Mobile Developer",
+    "Full-Stack Developer",
+    "Frontend Developer",
+    "Next.js Developer",
     "Nigeria",
   ],
 };
@@ -104,7 +104,7 @@ export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponen
  * Drop the PDF at `public/cv/ogabi-david-cv.pdf` and every CV link on the site picks it up.
  */
 export const cv = {
-  href: "/cv/ogabi-david-cv.pdf",
+  href: "/cv/Ogabi_David_Upgraded_CV.pdf",
   fileName: "Ogabi-David-CV.pdf",
   label: "Download CV",
 };
@@ -113,14 +113,15 @@ export const navItems: NavItem[] = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
+  { label: "Capabilities", href: "#capabilities" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const heroFacts: Fact[] = [
-  { label: "Focus", value: "Mobile apps with Flutter, React Native, and Kotlin" },
-  { label: "Also", value: "Web interfaces with React, Next.js, and TypeScript" },
+  { label: "Focus", value: "Flutter mobile products with structured architecture" },
+  { label: "Also", value: "Full-stack products with React, Next.js, and PostgreSQL" },
   { label: "Based in", value: `${siteConfig.location} · ${siteConfig.timezone}` },
-  { label: "Currently", value: "Building BizLedger and a student budget tracker in Flutter" },
+  { label: "Evidence", value: "15+ UI components · 5+ client projects · 20+ BizLedger workflows" },
 ];
 
 export const projects: Project[] = [
@@ -129,7 +130,7 @@ export const projects: Project[] = [
     title: "Student Budget Tracker",
     category: "Mobile · Personal finance",
     summary:
-      "An expense tracker built for university students, with daily, weekly, monthly, and semester budget views.",
+      "A Flutter expense tracker concept shaped around the way university students actually plan spending across a semester.",
     problem:
       "Student spending is irregular and concentrated in a few places, mostly restaurants and supermarkets. Generic finance apps do not frame a budget around a semester, which is the period that actually matters to a student.",
     role: "Design and development",
@@ -137,6 +138,10 @@ export const projects: Project[] = [
       "Budget views at daily, weekly, monthly, and semester granularity, so the same transactions can be read at whichever level matters at the time.",
       "Spending grouped by common student categories, including restaurants and supermarkets, with analytics on where money goes.",
       "Built in Flutter with Firebase as the backend, and Kotlin for the Android layer.",
+    ],
+    impact: [
+      "The project explores daily, weekly, monthly, and semester views as one coherent budgeting model.",
+      "Its status remains in progress; no user or production outcome is claimed.",
     ],
     stack: ["Flutter", "Dart", "Firebase", "Kotlin"],
     status: "In progress",
@@ -151,17 +156,63 @@ export const projects: Project[] = [
       "Small businesses often keep records in notebooks or spreadsheets that do not travel well between a phone and a laptop. BizLedger aims to make recording a transaction, and reading the picture that results, simple on any device.",
     role: "Design and development",
     notes: [
-      "Simple transaction entry as the core loop, so record keeping stays fast enough to actually happen.",
-      "Reporting focused on business-friendly visibility rather than accounting jargon.",
-      "A single Flutter codebase so the same ledger works across devices.",
+      "Designed 20+ core workflows spanning products, sales, inventory, debt management, reporting, business profiles, and backup/restore.",
+      "Implemented versioned relational local data with Drift/SQLite, schema migrations, and transactional workflows connected to PostgreSQL/Neon.",
+      "Structured the application with Feature-First + Clean Architecture, Riverpod state management, GoRouter navigation, and reusable service layers.",
     ],
-    stack: ["Flutter", "Dart"],
+    impact: [
+      "Built a business tool around repeatable sales and inventory workflows rather than a generic ledger screen.",
+      "Added safeguards including below-cost sale warnings, product archiving/restoration, stock adjustments, and direct cart quantity editing.",
+    ],
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite", "PostgreSQL", "Neon"],
+    status: "In progress",
+  },
+  {
+    slug: "acire-ventures-sales-system",
+    title: "Acire Ventures Sales System",
+    category: "Web · Full-stack business system",
+    summary:
+      "A full-stack sales and inventory platform designed around products, sales, invoices, reservations, accounts, representatives, and administration.",
+    problem:
+      "Business workflows need reliable transaction history and role-aware controls, not disconnected screens that leave important decisions to manual coordination.",
+    role: "Design and development",
+    notes: [
+      "Architected a relational PostgreSQL schema with Prisma and Neon to preserve transaction history across business workflows.",
+      "Implemented role-aware workflows for products, sales, invoices, reservations, business accounts, sales representatives, and administration.",
+      "Designed safeguards for below-cost confirmation, completed-sale correction, product archiving, reservation expiry, and duplicate-name prevention.",
+    ],
+    impact: [
+      "The system establishes a consistent data foundation for sales operations and audit history.",
+      "Production status is not claimed; the project is presented as an engineering case study.",
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Better Auth", "Vercel"],
+    status: "In progress",
+  },
+  {
+    slug: "gabi",
+    title: "GABI",
+    category: "Web · AI product platform",
+    summary:
+      "An AI-powered brand identity and creative direction platform that turns business context into structured brand systems and creative assets.",
+    problem:
+      "Early-stage brands need more than isolated generated images: they need a coherent strategy, visual system, and usable documentation that can guide future work.",
+    role: "Design and development",
+    notes: [
+      "Defined product requirements around brand strategy, logo systems, typography, color systems, AI-generated mockups, social content, and downloadable documentation.",
+      "Refined the product around context-aware generation, responsive architecture, animated interfaces, and industry-specific creative direction.",
+      "Built with a full-stack Next.js and TypeScript foundation alongside Figma-led product thinking.",
+    ],
+    impact: [
+      "The platform connects brand strategy and creative direction into one product workflow.",
+      "Its production status is intentionally not stated beyond the verified project scope.",
+    ],
+    stack: ["Next.js", "TypeScript", "AI", "Figma", "Full-stack"],
     status: "In progress",
   },
   {
     slug: "architect-portfolio",
     title: "Architect Portfolio",
-    category: "Web · Personal brand site",
+    category: "Web · Client website",
     summary:
       "A personal brand website for an architect, presenting services, expertise, and visual identity.",
     problem:
@@ -172,26 +223,31 @@ export const projects: Project[] = [
       "Performance-minded implementation focused on a strong first impression.",
       "Deployed on Vercel.",
     ],
+    impact: ["Delivered as part of 5+ client websites and software projects taken from requirements through deployment."],
     stack: ["React", "TypeScript", "Vercel"],
     status: "Live",
     href: "https://favour-ogabi.vercel.app",
   },
   {
-    slug: "depsense-api",
-    title: "DepSense API",
-    category: "Developer tooling · API",
+    slug: "portfolio",
+    title: "Personal Developer Portfolio",
+    category: "Web · Personal product",
     summary:
-      "A developer-focused API with a dependency analyser and an error decoder that turns stack traces into plain-English fixes.",
+      "A server-rendered portfolio designed to communicate mobile specialization, full-stack capability, and evidence-led engineering work.",
     problem:
-      "Dependency problems and cryptic stack traces slow developers down in every ecosystem. DepSense reads the manifests developers already have and explains failures in language that points at a fix.",
-    role: "Design and development",
+      "A multidisciplinary engineer needs a clear professional narrative without reducing meaningful projects to technology lists.",
+    role: "Product, design, and development",
     notes: [
-      "Dependency analyser accepts package.json, pubspec.yaml, and build.gradle, covering the npm, Dart, and Android ecosystems in one tool.",
-      "Error decoder translates stack traces into plain-English explanations and suggested fixes.",
-      "Implemented as a Node.js API.",
+      "Built with Next.js App Router, strict TypeScript, typed content, and a small set of client islands.",
+      "Uses structured metadata, Open Graph, responsive layouts, and progressive motion for a fast first impression.",
+      "Content is organized around projects, experience, capabilities, and direct conversion paths.",
     ],
-    stack: ["Node.js", "REST API"],
-    status: "In progress",
+    impact: [
+      "The current implementation carries 6+ reusable sections and is being upgraded against the latest CV.",
+      "The previous implementation achieved a 100 Lighthouse SEO score; this release is validated independently.",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    status: "Live",
   },
 ];
 
@@ -199,19 +255,19 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Mobile",
     primary: true,
-    items: ["Flutter", "Dart", "React Native", "Kotlin", "Jetpack Compose", "Android SDK"],
+    items: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite", "Kotlin", "Jetpack Compose", "Android"],
   },
   {
     title: "Web",
-    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Vite"],
+    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Responsive UI"],
   },
   {
     title: "Backend and data",
-    items: ["Firebase", "Supabase", "Node.js", "REST APIs"],
+    items: ["Node.js", "REST APIs", "PostgreSQL", "Neon", "Prisma", "Firebase", "Supabase", "Sanity"],
   },
   {
     title: "Tooling and design",
-    items: ["Git and GitHub", "Android Studio", "Gradle", "Figma", "VS Code"],
+    items: ["Better Auth", "Paystack", "Git", "GitHub", "GitLab", "Vercel", "Netlify", "Figma", "VS Code"],
   },
 ];
 
@@ -219,16 +275,10 @@ export const learning = ["Swift", "SwiftUI"];
 
 export const capabilities: Capability[] = [
   {
-    title: "Flutter development",
+    title: "Flutter product development",
     description:
-      "Cross-platform apps from a single Dart codebase, with attention to state, navigation, and screens that adapt to the device.",
+      "Cross-platform products from a single Dart codebase, with structured state, navigation, relational data, and screens that adapt to the device.",
     icon: Smartphone,
-  },
-  {
-    title: "React Native development",
-    description:
-      "Mobile apps for teams already invested in JavaScript and React, sharing patterns with the web.",
-    icon: TabletSmartphone,
   },
   {
     title: "Android development",
@@ -251,39 +301,47 @@ export const capabilities: Capability[] = [
   {
     title: "Backend and API integration",
     description:
-      "Connecting apps to Firebase, Supabase, and Node.js services.",
+      "Connecting products to PostgreSQL, Neon, Prisma, Firebase, Supabase, REST APIs, authentication, and payment services.",
     icon: Server,
   },
 ];
 
 export const experience: Experience[] = [
   {
-    period: "2024 – Present",
-    role: "Junior Mobile Developer",
-    organization: "Independent and freelance",
-    points: [
-      "Building cross-platform mobile apps with Flutter and React Native.",
-      "Exploring native Android with Kotlin and Jetpack Compose.",
-      "Publishing project work through GitHub-driven development.",
-    ],
-  },
-  {
-    period: "2024",
+    period: "Jul 2025 – Present",
     role: "Frontend Developer",
     organization: "NACOS DU Software Development Team",
     points: [
-      "Collaborated on responsive web interfaces and reusable UI components.",
-      "Worked within Git-based development workflows.",
-      "Helped implement features while keeping usability and performance in view.",
+      "Shipped 15+ production UI components for a student election platform used by 200+ students, including authentication and vote-progress flows.",
+      "Delivered 10+ pages and components from Figma specifications with responsive layouts, animations, and reusable interface patterns.",
+      "Collaborated within a 12-developer team using structured Git branching, code review, and shared delivery workflows.",
     ],
   },
   {
-    period: "2023 – Present",
-    role: "Software Engineering Student",
-    organization: "University",
+    period: "Jul 2025 – Present",
+    role: "Freelance Software Developer",
+    organization: "Independent client projects",
     points: [
-      "Studying software engineering fundamentals while shipping real projects in parallel.",
-      "Coursework spans data structures, programming principles, system design, and software architecture.",
+      "Delivered 5+ client websites and software projects with Next.js, TypeScript, React, and Tailwind CSS from requirements through production deployment.",
+      "Built BizLedger and the Acire Ventures Sales System across Flutter, PostgreSQL/Neon, Prisma, authentication, and role-aware workflows.",
+      "Resolved dependency conflicts, framework migrations, runtime errors, deployment failures, and configuration issues across local and cloud environments.",
+    ],
+  },
+  {
+    period: "2026",
+    role: "Product / Technical Lead",
+    organization: "Gbanner Systems",
+    points: [
+      "Coordinated development activities across departments by setting direction, reviewing progress, and aligning contributors around implementation priorities.",
+      "Ran cross-functional progress reviews to identify blockers, provide actionable feedback, and improve delivery across design and development workstreams.",
+    ],
+  },
+  {
+    period: "2024 – 2028",
+    role: "Software Engineering Student",
+    organization: "Dominion University, Ibadan",
+    points: [
+      "Building production-oriented mobile and full-stack projects alongside coursework in software engineering fundamentals, data structures, system design, and architecture.",
     ],
   },
 ];

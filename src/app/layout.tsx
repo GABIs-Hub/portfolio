@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Quicksand } from "next/font/google";
+import { Overpass, Quicksand } from "next/font/google";
 
 import { CursorBlob } from "@/components/cursor-blob";
+import { IntroSplash } from "@/components/intro-splash";
 import { RevealObserver } from "@/components/reveal-observer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -9,7 +10,15 @@ import "./globals.css";
 const quickSand = Quicksand({
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-quicksand",
+});
+
+const overpass = Overpass({
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  variable: "--font-overpass",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +57,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name}, mobile developer working with Flutter, React Native, and Kotlin`,
+        alt: `${siteConfig.name}, software engineer building Flutter mobile and full-stack products`,
       },
     ],
   },
@@ -84,13 +93,16 @@ const personSchema = {
   knowsAbout: [
     "Flutter",
     "Dart",
-    "React Native",
     "Kotlin",
     "Jetpack Compose",
     "Android Development",
     "React",
     "Next.js",
     "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Clean Architecture",
+    "Full-stack development",
     "Firebase",
     "Supabase",
   ],
@@ -98,11 +110,16 @@ const personSchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={quickSand.variable}>
+    <html
+      lang="en"
+      className={`${quickSand.variable} ${overpass.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <IntroSplash />
         {children}
         <CursorBlob />
         <RevealObserver />

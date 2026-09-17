@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Marks `[data-reveal]` elements with `data-inview` as they enter the viewport.
@@ -9,6 +10,8 @@ import { useEffect } from "react";
  * With reduced motion or without JavaScript, content is simply visible.
  */
 export function RevealObserver() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion || !("IntersectionObserver" in window)) return;
@@ -47,7 +50,7 @@ export function RevealObserver() {
     pending.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }

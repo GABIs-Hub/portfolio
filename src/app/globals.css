@@ -2,6 +2,7 @@
 
 @theme inline {
   --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: var(--font-overpass), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 /* Design tokens */
@@ -29,6 +30,8 @@
   --accent-2: #6b9cff;
 
   /* Type */
+  --font-heading: var(--font-overpass), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-quicksand), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -91,7 +94,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -123,6 +126,29 @@ h1,
 h2,
 h3,
 h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+p,
+li,
+dt,
+dd,
+label,
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
 dl,
 dd {
@@ -589,6 +615,12 @@ dd {
   align-content: start;
 }
 
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
 .case-summary {
   max-width: 62ch;
   color: var(--fg);
@@ -658,6 +690,31 @@ dd {
 .about-copy strong {
   color: var(--fg);
   font-weight: 600;
+}
+
+.about-lead {
+  font-size: var(--text-xl);
+}
+
+.about-evidence {
+  display: grid;
+  gap: 0.9rem;
+  margin-block: 1.25rem 2rem;
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--line);
+}
+
+.about-evidence p {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+.about-evidence strong {
+  color: var(--fg);
+  font-size: var(--text-base);
 }
 
 .timeline {
@@ -877,6 +934,201 @@ dd {
 .site-footer {
   padding-block: 2rem;
   border-top: 1px solid var(--line);
+}
+
+/* Case study pages */
+
+.work-page {
+  min-height: 100vh;
+  padding-block: clamp(2rem, 6vw, 5rem);
+}
+
+.work-back {
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+.work-header {
+  max-width: 760px;
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.work-header h1 {
+  max-width: 14ch;
+  margin-top: 1rem;
+  font-size: var(--text-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.work-summary {
+  max-width: 60ch;
+  margin-top: 1.5rem;
+  color: var(--fg-muted);
+  font-size: var(--text-xl);
+  line-height: 1.65;
+}
+
+.work-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  color: var(--fg-subtle);
+  font-size: var(--text-sm);
+}
+
+.work-pagination {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: stretch;
+  margin-top: clamp(4rem, 10vw, 8rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.work-pagination-link {
+  display: grid;
+  min-width: 0;
+  gap: 0.45rem;
+  align-content: center;
+  min-height: 88px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.work-pagination-link:hover,
+.work-pagination-link:focus-visible {
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.work-pagination-link strong {
+  display: flex;
+  min-width: 0;
+  gap: 0.4rem;
+  align-items: center;
+  font-size: var(--text-sm);
+}
+
+.work-pagination-link strong {
+  overflow-wrap: anywhere;
+}
+
+.work-pagination-link:hover strong,
+.work-pagination-link:focus-visible strong {
+  color: var(--accent);
+}
+
+.work-pagination-next {
+  text-align: right;
+  justify-items: end;
+}
+
+.work-pagination-all {
+  align-self: center;
+  padding: 0.6rem 0.25rem;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+  white-space: nowrap;
+}
+
+.work-pagination-all:hover,
+.work-pagination-all:focus-visible {
+  color: var(--accent);
+}
+
+.intro-splash {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  background: var(--bg);
+  color: var(--fg);
+  animation: splash-out 420ms var(--ease) forwards;
+  pointer-events: none;
+}
+
+.intro-splash-mark {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  letter-spacing: 0.2em;
+}
+
+.intro-splash-line {
+  width: 5rem;
+  height: 1px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: splash-line 420ms var(--ease) forwards;
+}
+
+@keyframes splash-out {
+  0%, 65% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes splash-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.work-header .tag-list {
+  margin-top: 1.5rem;
+}
+
+.work-content {
+  display: grid;
+  gap: 0;
+  max-width: 760px;
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.work-content section {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr);
+  gap: 2rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.work-content h2 {
+  color: var(--fg-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-content p,
+.work-content li {
+  color: var(--fg-muted);
+  line-height: 1.75;
+}
+
+.work-content ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.work-content li::marker {
+  color: var(--accent);
 }
 
 .site-footer .wrap {
@@ -1106,5 +1358,32 @@ dd {
 
   .site-footer .wrap {
     display: grid;
+  }
+
+  .work-content section {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .work-pagination {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+  }
+
+  .work-pagination-all {
+    grid-row: auto;
+    justify-self: center;
+  }
+
+  .work-pagination-next {
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash,
+  .intro-splash-line {
+    animation-duration: 1ms;
   }
 }

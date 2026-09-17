@@ -1,7 +1,9 @@
 import { ArrowRight, ArrowUpRight, Download, Mail } from "lucide-react";
+import Link from "next/link";
 
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
+import { ExternalActionLink } from "@/components/external-action-link";
 import {
   capabilities,
   contactLinks,
@@ -28,7 +30,7 @@ export default function Home() {
           <div className="wrap">
             <p className="hero-intro" data-enter="0">
               <span className="status-dot" aria-hidden="true" />
-              Open to mobile roles and freelance projects
+              Open to software engineering, mobile, and full-stack opportunities
             </p>
 
             <h1 id="hero-title" data-enter="1">
@@ -41,24 +43,25 @@ export default function Home() {
             </p>
 
             <p className="hero-lede" data-enter="3">
-              I&apos;m Gabi. I build cross-platform mobile apps, currently a ledger app for small
-              businesses and a budgeting app for students, and the web interfaces around them with
-              React and Next.js. I care about clear screens, structured code, and releases that keep
-              improving.
+              I&apos;m Gabi, a software engineering student building Flutter mobile products and
+              full-stack applications with React, Next.js, TypeScript, and PostgreSQL. I move from
+              product context and architecture through UI implementation, integration, testing, and
+              deployment.
             </p>
 
             <div className="hero-actions" data-enter="4">
               <a className="button button-primary" href="#work">
                 Selected work <ArrowRight size={16} aria-hidden="true" />
               </a>
-              <a
+              <ExternalActionLink
                 className="button button-secondary"
                 href={cv.href}
                 download={cv.fileName}
                 type="application/pdf"
+                pendingLabel="Preparing…"
               >
                 {cv.label} <Download size={16} aria-hidden="true" />
-              </a>
+              </ExternalActionLink>
               <a className="text-link hero-email" href={emailHref}>
                 Email me <Mail size={16} aria-hidden="true" />
               </a>
@@ -135,12 +138,17 @@ export default function Home() {
                         </dd>
                       </div>
                     </dl>
-                    {project.href ? (
-                      <a className="text-link" href={project.href} target="_blank" rel="noreferrer">
-                        View live site <ArrowUpRight size={16} aria-hidden="true" />
-                        <span className="sr-only">(opens in a new tab)</span>
-                      </a>
-                    ) : null}
+                    <div className="case-links">
+                      <Link className="text-link" href={`/work/${project.slug}`}>
+                        Read case study <ArrowRight size={16} aria-hidden="true" />
+                      </Link>
+                      {project.href ? (
+                        <ExternalActionLink className="text-link" href={project.href} target="_blank" rel="noreferrer">
+                          View live site <ArrowUpRight size={16} aria-hidden="true" />
+                          <span className="sr-only">(opens in a new tab)</span>
+                        </ExternalActionLink>
+                      ) : null}
+                    </div>
                   </div>
                 </article>
               ))}
@@ -153,36 +161,46 @@ export default function Home() {
             <SectionHeading
               id="about-title"
               eyebrow="About"
-              title="A mobile developer who started on the web."
+              title="Flutter-first engineering across the product lifecycle."
             />
 
             <div className="about-grid">
               <div className="about-copy" data-reveal>
-                <p>
-                  <strong>I&apos;m David, Gabi to most people.</strong> A software engineering student
-                  and mobile developer based in Nigeria. I started with web interfaces in React, moved
-                  into Flutter, and now spend most of my time building cross-platform apps.
+                <p className="about-lead">
+                  <strong>Who I am:</strong> I&apos;m David, Gabi to most people — a software
+                  engineering student and mobile developer based in Nigeria.
                 </p>
                 <p>
-                  The projects I enjoy most are practical tools with a clear job: a ledger for a small
-                  business, a budget tracker shaped around a student&apos;s semester, an API that
-                  explains a stack trace in plain English. I like taking something ambiguous and
-                  turning it into a scoped release that can keep improving.
+                  <strong>What I specialize in:</strong> Flutter and Dart for cross-platform mobile
+                  products, supported by React, Next.js, TypeScript, and PostgreSQL when the product
+                  needs a web interface or full-stack foundation.
                 </p>
                 <p>
-                  My approach is straightforward: typed data, clear state, screens that adapt to the
-                  device they run on, and code another developer can pick up without a walkthrough.
-                  Working across web and mobile means I can build the app and the interface around
-                  it, and connect both to services like Firebase and Supabase.
+                  <strong>What I have built:</strong> practical tools with a clear job, including a
+                  business ledger, a semester-focused budget tracker, full-stack sales systems, and
+                  brand tooling. My experience spans UI engineering, backend/API integration,
+                  authentication, database migrations, and deployment.
                 </p>
                 <p>
-                  Next on the path is native iOS. I&apos;m learning Swift and SwiftUI so that
-                  &quot;cross-platform&quot; eventually covers every platform for real.
+                  <strong>How I approach engineering:</strong> I move from product context and
+                  architecture to typed data, clear state, responsive screens, testing, and a release
+                  another developer can continue without a walkthrough. I value Feature-First and
+                  Clean Architecture when they make the system easier to evolve.
+                </p>
+                <p>
+                  <strong>Where I&apos;m heading:</strong> deeper mobile engineering, native iOS with
+                  Swift and SwiftUI, and product teams where thoughtful implementation matters as much
+                  as shipping.
                 </p>
               </div>
 
               <div data-reveal>
                 <h3 className="subheading">Background</h3>
+                <div className="about-evidence" aria-label="Experience evidence">
+                  <p><strong>15+ production UI components</strong><span>Delivered through interface work and reusable frontend systems.</span></p>
+                  <p><strong>200+ student users</strong><span>Supported by a student election platform built in a collaborative team.</span></p>
+                  <p><strong>5+ client projects</strong><span>Covered from requirements and implementation through live deployment.</span></p>
+                </div>
                 <ol className="timeline">
                   {experience.map((item) => (
                     <li className="timeline-item" key={`${item.role}-${item.period}`}>
@@ -269,10 +287,10 @@ export default function Home() {
                 you&apos;re hiring for, and I&apos;ll get back to you.
               </p>
               <div className="contact-actions">
-                <a className="button button-primary" href={emailHref}>
+                <ExternalActionLink className="button button-primary" href={emailHref}>
                   Email me <Mail size={16} aria-hidden="true" />
-                </a>
-                <a
+                </ExternalActionLink>
+                <ExternalActionLink
                   className="button button-secondary"
                   href={siteConfig.whatsapp}
                   target="_blank"
@@ -280,22 +298,23 @@ export default function Home() {
                 >
                   WhatsApp <ArrowUpRight size={16} aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                </ExternalActionLink>
               </div>
             </div>
 
             <ul className="contact-list" aria-label="Contact details" data-reveal>
               {contactLinks.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <ExternalActionLink
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noreferrer" : undefined}
                     download={link.download}
+                    pendingLabel={link.download ? "Preparing…" : "Opening…"}
                   >
                     <span>{link.label}</span>
                     <span>{link.value}</span>
-                  </a>
+                  </ExternalActionLink>
                 </li>
               ))}
             </ul>

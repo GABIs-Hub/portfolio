@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import type { NavItem } from "@/lib/site";
@@ -13,7 +13,7 @@ type MobileNavProps = {
 export function MobileNav({ items, cv }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const panelId = useId();
+  const panelId = "mobile-navigation-panel";
 
   useEffect(() => {
     if (!open) return;
