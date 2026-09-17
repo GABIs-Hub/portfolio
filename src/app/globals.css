@@ -85,6 +85,11 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .section-progress-fill,
+  .section-progress-marker span:first-child {
+    transition: none;
+  }
+
   html {
     scroll-behavior: auto;
   }
@@ -159,6 +164,89 @@ dd {
 .page-shell {
   min-height: 100vh;
   overflow-x: clip;
+}
+
+html:has(.page-shell) {
+  scrollbar-width: none;
+}
+
+html:has(.page-shell)::-webkit-scrollbar {
+  display: none;
+}
+
+.section-progress {
+  position: fixed;
+  top: 50%;
+  right: max(0.75rem, calc((100vw - var(--container)) / 2 - 3.25rem));
+  z-index: 30;
+  display: grid;
+  width: 2rem;
+  height: 13rem;
+  transform: translateY(-50%);
+  isolation: isolate;
+}
+
+.section-progress-track {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--line-strong);
+}
+
+.section-progress-fill {
+  display: block;
+  width: 1px;
+  background: var(--accent);
+  transition: height var(--duration-fast) linear;
+}
+
+.section-progress-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section-progress-list li {
+  display: grid;
+  place-items: center;
+}
+
+.section-progress-marker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.section-progress-marker span:first-child {
+  display: block;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--fg-subtle);
+  transition:
+    width var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.section-progress-marker:hover span:first-child,
+.section-progress-marker[data-active="true"] span:first-child {
+  width: 1.15rem;
+  background: var(--accent);
+}
+
+.section-progress-marker[data-active="true"] span:first-child {
+  height: 2px;
 }
 
 .wrap {
@@ -428,8 +516,26 @@ dd {
 /* Hero */
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   padding-top: clamp(4rem, 9vw, 7.5rem);
   padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.hero-parallax {
+  position: absolute;
+  z-index: -1;
+  top: 2rem;
+  right: clamp(1rem, 10vw, 8rem);
+  width: clamp(10rem, 24vw, 18rem);
+  aspect-ratio: 1;
+  border: 1px solid rgb(52 211 184 / 18%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(52 211 184 / 10%), transparent 68%);
+  opacity: 0.8;
+  pointer-events: none;
+  will-change: transform;
 }
 
 .hero-intro {
@@ -1305,6 +1411,31 @@ dd {
 }
 
 @media (max-width: 600px) {
+  .section-progress {
+    right: 0.35rem;
+    width: 1.5rem;
+    height: 9.5rem;
+  }
+
+  .section-progress-track {
+    display: none;
+  }
+
+  .section-progress-marker {
+    width: 1.5rem;
+    height: 1.25rem;
+  }
+
+  .section-progress-marker span:first-child {
+    width: 0.45rem;
+    background: var(--fg-subtle);
+  }
+
+  .section-progress-marker:hover span:first-child,
+  .section-progress-marker[data-active="true"] span:first-child {
+    width: 0.95rem;
+  }
+
   .hero h1 {
     max-width: none;
   }
@@ -1385,5 +1516,10 @@ dd {
   .intro-splash,
   .intro-splash-line {
     animation-duration: 1ms;
+  }
+
+  .hero-parallax {
+    transform: none !important;
+    will-change: auto;
   }
 }

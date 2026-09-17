@@ -79,6 +79,7 @@ export const viewport: Viewport = {
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${siteConfig.url}/#person`,
   name: siteConfig.name,
   alternateName: siteConfig.nickname,
   url: siteConfig.url,

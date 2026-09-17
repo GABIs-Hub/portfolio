@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight, Download, Mail } from "lucide-react";
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/section-heading";
+import { SectionProgress } from "@/components/section-progress";
 import { SiteHeader } from "@/components/site-header";
 import { ExternalActionLink } from "@/components/external-action-link";
 import {
@@ -22,11 +23,12 @@ export default function Home() {
   const year = new Date().getFullYear();
 
   return (
-    <div id="top" className="page-shell">
+    <div className="page-shell">
       <SiteHeader />
+      <SectionProgress />
 
       <main id="main">
-        <section className="section hero" aria-labelledby="hero-title">
+        <section id="top" className="section hero" aria-labelledby="hero-title">
           <div className="wrap">
             <p className="hero-intro" data-enter="0">
               <span className="status-dot" aria-hidden="true" />
@@ -339,6 +341,34 @@ export default function Home() {
           </a>
         </div>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": `${siteConfig.url}/#website`,
+                url: siteConfig.url,
+                name: siteConfig.siteName,
+                description: siteConfig.description,
+                inLanguage: "en",
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${siteConfig.url}/#webpage`,
+                url: siteConfig.url,
+                name: siteConfig.title,
+                description: siteConfig.description,
+                isPartOf: { "@id": `${siteConfig.url}/#website` },
+                about: { "@id": `${siteConfig.url}/#person` },
+                inLanguage: "en",
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

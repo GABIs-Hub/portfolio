@@ -23,7 +23,7 @@ npm run build
 
 ## Architecture
 
-- `src/app/layout.tsx` sets metadata, the font, structured data, and the two client islands (cursor and scroll reveal).
+- `src/app/layout.tsx` sets metadata, the fonts, structured data, and shared client behavior; the homepage also mounts focused client islands for the cursor, scroll reveal, intro splash, actions, section progress navigation, and a restrained transform-only hero parallax layer.
 - `src/app/page.tsx` is the server-rendered homepage: hero, selected work, about, skills, capabilities, contact.
 - `src/app/work/[slug]/page.tsx` renders typed static case-study pages for selected projects.
 - `src/app/globals.css` holds the design tokens (colour, type scale, spacing, radius, motion) and all component styles.

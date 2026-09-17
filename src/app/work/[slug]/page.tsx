@@ -22,13 +22,23 @@ export async function generateMetadata({ params }: WorkPageProps): Promise<Metad
 
   return {
     title: project.title,
-    description: project.summary,
+    description: `${project.summary} Role: ${project.role}.`,
     alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
       title: `${project.title} · ${siteConfig.name}`,
-      description: project.summary,
+      description: `${project.summary} Role: ${project.role}.`,
       url: `${siteConfig.url}/work/${project.slug}`,
+      siteName: siteConfig.siteName,
+      locale: "en_US",
       type: "article",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${project.title} case study by ${siteConfig.name}`,
+        },
+      ],
     },
   };
 }
@@ -115,6 +125,31 @@ export default async function WorkPage({ params }: WorkPageProps) {
             </Link>
           </nav>
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "@id": `${siteConfig.url}/work/${project.slug}#case-study`,
+              url: `${siteConfig.url}/work/${project.slug}`,
+              name: project.title,
+              description: project.summary,
+              genre: project.category,
+              keywords: project.stack.join(", "),
+              author: {
+                "@type": "Person",
+                "@id": `${siteConfig.url}/#person`,
+                name: siteConfig.name,
+              },
+              creator: {
+                "@type": "Person",
+                "@id": `${siteConfig.url}/#person`,
+                name: siteConfig.name,
+              },
+            }),
+          }}
+        />
       </main>
     </div>
   );
