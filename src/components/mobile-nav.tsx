@@ -10,6 +10,7 @@ type MobileNavProps = {
   cv: { href: string; fileName: string; label: string };
 };
 
+/** Renders the dismissible mobile navigation menu and CV download action. */
 export function MobileNav({ items, cv }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);

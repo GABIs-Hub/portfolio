@@ -10,10 +10,12 @@ type WorkPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+/** Returns the project slugs that Next.js pre-renders as case-study pages. */
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
+/** Builds page metadata for the requested project, when it exists. */
 export async function generateMetadata({ params }: WorkPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
@@ -43,6 +45,7 @@ export async function generateMetadata({ params }: WorkPageProps): Promise<Metad
   };
 }
 
+/** Renders a project case study or delegates unknown slugs to the 404 route. */
 export default async function WorkPage({ params }: WorkPageProps) {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);

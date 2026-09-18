@@ -109,6 +109,7 @@ const personSchema = {
   ],
 };
 
+/** Renders the shared document shell, global client effects, and person metadata. */
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html

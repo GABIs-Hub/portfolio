@@ -7,6 +7,7 @@ type ExternalActionLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   pendingLabel?: string;
 };
 
+/** Renders an anchor with brief pending feedback while its external action begins. */
 export function ExternalActionLink({
   children,
   pendingLabel = "Opening…",

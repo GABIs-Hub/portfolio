@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const splashKey = "gabi-intro-seen";
 
+/** Shows a short introductory mark once per browser session. */
 export function IntroSplash() {
   const [visible, setVisible] = useState(false);
 

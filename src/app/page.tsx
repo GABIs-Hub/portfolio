@@ -26,6 +26,7 @@ const proofPoints = [
   "Git · GitHub · Android Studio",
 ];
 
+/** Renders the portfolio homepage and its primary content sections. */
 export default function Home() {
   const year = new Date().getFullYear();
 
