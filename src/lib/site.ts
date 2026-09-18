@@ -101,7 +101,7 @@ export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponen
 
 /**
  * The CV is served as a static file from `public/cv/`.
- * Drop the PDF at `public/cv/ogabi-david-cv.pdf` and every CV link on the site picks it up.
+ * Drop the PDF at `public/cv/Ogabi_David_Upgraded_CV.pdf` and every CV link on the site picks it up.
  */
 export const cv = {
   href: "/cv/Ogabi_David_Upgraded_CV.pdf",

@@ -93,7 +93,7 @@ export default function Home() {
               id="work-title"
               eyebrow="Selected work"
               title="Projects, written up as case studies."
-              description="Four projects across mobile, web, and developer tooling. Each one states the problem, my role, and the engineering decisions behind it. Status is stated plainly."
+              description={`${projects.length} projects across mobile, web, and developer tooling. Each one states the problem, my role, and the engineering decisions behind it. Status is stated plainly.`}
             />
 
             <div className="case-list">

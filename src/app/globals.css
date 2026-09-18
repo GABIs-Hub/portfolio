@@ -166,14 +166,6 @@ dd {
   overflow-x: clip;
 }
 
-html:has(.page-shell) {
-  scrollbar-width: none;
-}
-
-html:has(.page-shell)::-webkit-scrollbar {
-  display: none;
-}
-
 .section-progress {
   position: fixed;
   top: 50%;

@@ -28,7 +28,7 @@ npm run build
 - `src/app/work/[slug]/page.tsx` renders typed static case-study pages for selected projects.
 - `src/app/globals.css` holds the design tokens (colour, type scale, spacing, radius, motion) and all component styles.
 - `src/lib/site.ts` is the single typed content source. Edit copy, projects, and links here.
-- `src/components` contains small UI pieces. Only `mobile-nav`, `cursor-blob`, and `reveal-observer` run on the client.
+- `src/components` contains small UI pieces. Client components are `mobile-nav`, `cursor-blob`, `reveal-observer`, `external-action-link`, `intro-splash`, and `section-progress`.
 - `docs/technical-architecture.md` records decisions and extension points.
 
 ## CV download

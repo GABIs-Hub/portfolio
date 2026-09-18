@@ -13,13 +13,17 @@ type MobileNavProps = {
 export function MobileNav({ items, cv }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const panelId = "mobile-navigation-panel";
 
   useEffect(() => {
     if (!open) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        toggleRef.current?.focus();
+        setOpen(false);
+      }
     };
 
     const onPointerDown = (event: PointerEvent) => {
@@ -42,6 +46,7 @@ export function MobileNav({ items, cv }: MobileNavProps) {
       <button
         type="button"
         className="icon-button"
+        ref={toggleRef}
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Close navigation" : "Open navigation"}

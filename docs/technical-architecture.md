@@ -8,9 +8,9 @@ The original Vite implementation was a single browser-heavy component with inlin
 
 ## Decisions
 
-- Server Components by default. Client islands are limited to `MobileNav`, `CursorBlob`, `RevealObserver`, `ExternalActionLink`, and `IntroSplash`, each owning a browser-only interaction.
+- Server Components by default. Client islands are `MobileNav`, `CursorBlob`, `RevealObserver`, `ExternalActionLink`, `IntroSplash`, and `SectionProgress`, each owning a browser-only interaction.
 - In-page navigation uses plain anchors with `scroll-padding-top`, not `next/link`, to avoid shipping router code for hash links.
-- The homepage includes an accessible `SectionProgress` client island: a fixed desktop rail and compact mobile tick navigation track the six primary sections without intercepting native wheel, touch, or keyboard scrolling. The native scrollbar is visually hidden while reduced motion disables indicator transitions and smooth jumps.
+- The homepage includes an accessible `SectionProgress` client island: a fixed desktop rail and compact mobile tick navigation track the six primary sections without intercepting native wheel, touch, or keyboard scrolling. The native scrollbar remains available while reduced motion disables indicator transitions and smooth jumps.
 - Quicksand is loaded through `next/font/google`, which self-hosts the font at build time. Builds need network access to fetch it once; there is no runtime request.
 - Design tokens live as CSS custom properties in `globals.css` (surfaces, text, accent, type scale, spacing, radius, motion). Components reference tokens rather than raw values.
 - The cursor is a single soft blob plus a dot, moved with `translate3d` in a `requestAnimationFrame` loop that stops when settled. It renders only for `pointer: fine` and `hover: hover` devices with no reduced-motion preference, and uses no filters or backdrop blur.
