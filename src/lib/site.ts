@@ -109,6 +109,8 @@ export const cv = {
   label: "Download CV",
 };
 
+export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Project enquiry")}`;
+
 export const navItems: NavItem[] = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
@@ -122,9 +124,26 @@ export const heroFacts: Fact[] = [
   { label: "Also", value: "Full-stack products with React, Next.js, and PostgreSQL" },
   { label: "Based in", value: `${siteConfig.location} · ${siteConfig.timezone}` },
   { label: "Evidence", value: "15+ UI components · 5+ client projects · 20+ BizLedger workflows" },
+  {
+    slug: "depsense-api",
+    title: "DepSense API",
+    category: "Developer tooling · API",
+    summary:
+      "A developer-focused API with a dependency analyser and an error decoder that turns stack traces into plain-English fixes.",
+    problem:
+      "Dependency problems and cryptic stack traces slow developers down in every ecosystem. DepSense reads the manifests developers already have and explains failures in language that points at a fix.",
+    role: "Design and development",
+    notes: [
+      "Dependency analyser accepts package.json, pubspec.yaml, and build.gradle, covering the npm, Dart, and Android ecosystems in one tool.",
+      "Error decoder translates stack traces into plain-English explanations and suggested fixes.",
+      "Implemented as a Node.js API.",
+    ],
+    stack: ["Node.js", "REST API"],
+    status: "In progress",
+  },
 ];
 
-export const projects: Project[] = [
+export const skillGroups: SkillGroup[] = [
   {
     slug: "student-budget-tracker",
     title: "Student Budget Tracker",

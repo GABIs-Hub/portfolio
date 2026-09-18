@@ -19,6 +19,13 @@ import {
   socials,
 } from "@/lib/site";
 
+const proofPoints = [
+  "Flutter · Dart · Kotlin",
+  "React · Next.js · TypeScript",
+  "Firebase · Supabase · Node.js",
+  "Git · GitHub · Android Studio",
+];
+
 export default function Home() {
   const year = new Date().getFullYear();
 
