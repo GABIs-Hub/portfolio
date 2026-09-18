@@ -1,14 +1,16 @@
 import type { MetadataRoute } from "next";
 
-import { siteConfig } from "@/lib/site";
+import { projects, siteConfig } from "@/lib/site";
 
+/** Builds sitemap entries for the homepage and every project case study. */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    {
-      url: siteConfig.url,
-      lastModified: new Date("2026-08-24"),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
+    { url: siteConfig.url, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
+    ...projects.map((project) => ({
+      url: `${siteConfig.url}/work/${project.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }

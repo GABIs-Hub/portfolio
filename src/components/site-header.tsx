@@ -1,35 +1,36 @@
-import Link from "next/link";
-import { Menu } from "lucide-react";
+import { MobileNav } from "@/components/mobile-nav";
+import { cv, navItems, siteConfig } from "@/lib/site";
 
-import { navItems, siteConfig } from "@/lib/site";
-
+/** Renders the responsive site header, navigation, and CV action. */
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="brand-link" href="#top" aria-label={`${siteConfig.name} home`}>
-        <span>{siteConfig.brand}</span>
-      </Link>
+      <div className="wrap">
+        <a className="brand-link" href="#top" aria-label={`${siteConfig.name}, back to top`}>
+          <span className="brand-mark" aria-hidden="true" />
+          <span>{siteConfig.brand}</span>
+        </a>
 
-      <nav className="desktop-nav" aria-label="Main navigation">
-        {navItems.map((item) => (
-          <Link key={item.href} href={item.href}>
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-
-      <details className="mobile-nav">
-        <summary aria-label="Open navigation">
-          <Menu aria-hidden="true" size={20} />
-        </summary>
-        <nav aria-label="Mobile navigation">
+        <nav className="desktop-nav" aria-label="Main navigation">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <a key={item.href} href={item.href}>
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
-      </details>
+
+        <div className="header-actions">
+          <a
+            className="button button-secondary button-small header-cta"
+            href={cv.href}
+            download={cv.fileName}
+            type="application/pdf"
+          >
+            {cv.label}
+          </a>
+          <MobileNav items={navItems} cv={cv} />
+        </div>
+      </div>
     </header>
   );
 }
