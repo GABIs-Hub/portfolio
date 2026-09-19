@@ -5,6 +5,7 @@ import { CursorBlob } from "@/components/cursor-blob";
 import { IntroSplash } from "@/components/intro-splash";
 import { RevealObserver } from "@/components/reveal-observer";
 import { siteConfig } from "@/lib/site";
+import { DEFAULT_THEME, THEME_COLORS, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const quickSand = Quicksand({
@@ -72,8 +73,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0c0f",
-  colorScheme: "dark",
+  // Pre-script defaults follow the operating system; the theme toggle then
+  // rewrites these to match the active theme.
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
+  ],
+  colorScheme: "dark light",
 };
 
 const personSchema = {
@@ -110,13 +116,23 @@ const personSchema = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // Dark is the server-rendered default. `themeInitScript` runs before the first
+  // paint and may replace it with the visitor's stored theme, so hydration
+  // warnings are suppressed for the `<html>` element only.
   return (
     <html
       lang="en"
       className={`${quickSand.variable} ${overpass.variable}`}
       data-scroll-behavior="smooth"
+      data-theme={DEFAULT_THEME}
+      suppressHydrationWarning
     >
       <body>
+        {/* Inline and synchronous on purpose: it is the first node in <body>, so it
+            runs in the same parser task as the start of the body and therefore
+            before any content is painted. `next/script` would queue it for the
+            framework bundle and reintroduce a flash of the wrong theme. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

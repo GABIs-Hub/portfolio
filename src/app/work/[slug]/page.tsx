@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { ExternalActionLink } from "@/components/external-action-link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { projects, siteConfig } from "@/lib/site";
 
 type WorkPageProps = {
@@ -56,9 +57,12 @@ export default async function WorkPage({ params }: WorkPageProps) {
     <div className="page-shell">
       <main id="main" className="work-page">
         <div className="wrap">
-          <Link className="text-link work-back" href="/#work">
-            <ArrowLeft size={16} aria-hidden="true" /> Back to selected work
-          </Link>
+          <div className="work-topbar">
+            <Link className="text-link work-back" href="/#work">
+              <ArrowLeft size={16} aria-hidden="true" /> Back to selected work
+            </Link>
+            <ThemeToggle />
+          </div>
 
           <header className="work-header">
             <p className="eyebrow">{project.category}</p>

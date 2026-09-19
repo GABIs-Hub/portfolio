@@ -1,4 +1,5 @@
 import { MobileNav } from "@/components/mobile-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cv, navItems, siteConfig } from "@/lib/site";
 
 export function SiteHeader() {
@@ -27,6 +28,7 @@ export function SiteHeader() {
           >
             {cv.label}
           </a>
+          <ThemeToggle />
           <MobileNav items={navItems} cv={cv} />
         </div>
       </div>
