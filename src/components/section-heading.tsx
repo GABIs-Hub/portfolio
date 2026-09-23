@@ -5,6 +5,7 @@ type SectionHeadingProps = {
   description?: string;
 };
 
+/** Renders a consistently styled heading and optional description for a page section. */
 export function SectionHeading({ id, eyebrow, title, description }: SectionHeadingProps) {
   return (
     <div className="section-heading" data-reveal>

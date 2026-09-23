@@ -19,6 +19,14 @@ import {
   socials,
 } from "@/lib/site";
 
+const proofPoints = [
+  "Flutter · Dart · Kotlin",
+  "React · Next.js · TypeScript",
+  "Firebase · Supabase · Node.js",
+  "Git · GitHub · Android Studio",
+];
+
+/** Renders the portfolio homepage and its primary content sections. */
 export default function Home() {
   const year = new Date().getFullYear();
 
@@ -86,7 +94,7 @@ export default function Home() {
               id="work-title"
               eyebrow="Selected work"
               title="Projects, written up as case studies."
-              description="Four projects across mobile, web, and developer tooling. Each one states the problem, my role, and the engineering decisions behind it. Status is stated plainly."
+              description={`${projects.length} projects across mobile, web, and developer tooling. Each one states the problem, my role, and the engineering decisions behind it. Status is stated plainly.`}
             />
 
             <div className="case-list">

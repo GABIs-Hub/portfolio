@@ -115,6 +115,7 @@ const personSchema = {
   ],
 };
 
+/** Renders the shared document shell, global client effects, and person metadata. */
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // Dark is the server-rendered default. `themeInitScript` runs before the first
   // paint and may replace it with the visitor's stored theme, so hydration

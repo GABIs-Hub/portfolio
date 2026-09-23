@@ -2,6 +2,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cv, navItems, siteConfig } from "@/lib/site";
 
+/** Renders the responsive site header, navigation, and CV action. */
 export function SiteHeader() {
   return (
     <header className="site-header">

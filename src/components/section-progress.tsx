@@ -16,6 +16,7 @@ const sections: Section[] = [
   { id: "contact", label: "Contact" },
 ];
 
+/** Tracks reading progress and provides shortcuts to the homepage sections. */
 export function SectionProgress() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
