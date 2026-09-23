@@ -59,7 +59,15 @@ export default function Home() {
               deployment.
             </p>
 
-            <div className="hero-actions" data-enter="4">
+            <ul className="tag-list hero-proof-points" data-enter="4" aria-label="Core stack">
+              {proofPoints.map((point) => (
+                <li className="tag" key={point}>
+                  {point}
+                </li>
+              ))}
+            </ul>
+
+            <div className="hero-actions" data-enter="5">
               <a className="button button-primary" href="#work">
                 Selected work <ArrowRight size={16} aria-hidden="true" />
               </a>
@@ -77,7 +85,7 @@ export default function Home() {
               </a>
             </div>
 
-            <dl className="hero-facts" data-enter="5">
+            <dl className="hero-facts" data-enter="6">
               {heroFacts.map((fact) => (
                 <div className="hero-fact" key={fact.label}>
                   <dt>{fact.label}</dt>
