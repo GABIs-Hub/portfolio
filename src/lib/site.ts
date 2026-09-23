@@ -22,7 +22,7 @@ export type Project = {
   problem: string;
   role: string;
   notes: string[];
-  impact: string[];
+  impact?: string[]; // Made optional since DepSense API doesn't have it
   stack: string[];
   status: ProjectStatus;
   href?: string;
@@ -109,8 +109,6 @@ export const cv = {
   label: "Download CV",
 };
 
-export const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Project enquiry")}`;
-
 export const navItems: NavItem[] = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
@@ -124,6 +122,9 @@ export const heroFacts: Fact[] = [
   { label: "Also", value: "Full-stack products with React, Next.js, and PostgreSQL" },
   { label: "Based in", value: `${siteConfig.location} · ${siteConfig.timezone}` },
   { label: "Evidence", value: "15+ UI components · 5+ client projects · 20+ BizLedger workflows" },
+];
+
+export const projects: Project[] = [
   {
     slug: "depsense-api",
     title: "DepSense API",
@@ -141,9 +142,6 @@ export const heroFacts: Fact[] = [
     stack: ["Node.js", "REST API"],
     status: "In progress",
   },
-];
-
-export const skillGroups: SkillGroup[] = [
   {
     slug: "student-budget-tracker",
     title: "Student Budget Tracker",
