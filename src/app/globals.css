@@ -5,30 +5,14 @@
   --font-heading: var(--font-overpass), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* Design tokens */
+/* Design tokens
+   -------------------------------------------------------------------------
+   Theme-agnostic tokens (typography, scale, layout, shape, motion) are declared
+   once. Theme tokens (surfaces, lines, text, accent, effects) are declared per
+   theme. Dark is both the default and the primary identity, so the
+   server-rendered document is already correct before any script runs. */
 
 :root {
-  color-scheme: dark;
-
-  /* Surfaces */
-  --bg: #0b0c0f;
-  --bg-elevated: #101216;
-  --surface: #14171c;
-
-  /* Lines */
-  --line: rgb(255 255 255 / 8%);
-  --line-strong: rgb(255 255 255 / 16%);
-
-  /* Text */
-  --fg: #eef0f3;
-  --fg-muted: #a6adb8;
-  --fg-subtle: #7d858f;
-
-  /* Accent */
-  --accent: #34d3b8;
-  --accent-soft: rgb(52 211 184 / 14%);
-  --accent-2: #6b9cff;
-
   /* Type */
   --font-heading: var(--font-overpass), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: var(--font-quicksand), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -58,6 +42,83 @@
   --duration-fast: 160ms;
   --duration: 320ms;
   --duration-slow: 640ms;
+  --theme-duration: 200ms;
+}
+
+/* Theme: dark — the default and the primary visual identity. */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #0b0c0f;
+  --bg-elevated: #101216;
+  --surface: #14171c;
+  --header-bg: rgb(11 12 15 / 82%);
+
+  /* Lines */
+  --line: rgb(255 255 255 / 8%);
+  --line-strong: rgb(255 255 255 / 16%);
+
+  /* Text */
+  --fg: #eef0f3;
+  --fg-strong: #ffffff;
+  --fg-muted: #a6adb8;
+  --fg-subtle: #7d858f;
+
+  /* Interaction */
+  --hover: rgb(255 255 255 / 5%);
+  --shadow-elevated: 0 16px 40px rgb(0 0 0 / 40%);
+
+  /* Accent */
+  --accent: #34d3b8;
+  --accent-soft: rgb(52 211 184 / 14%);
+  --accent-fg: #0b0c0f;
+  --accent-2: #6b9cff;
+
+  /* Decorative effects */
+  --cursor-glow: radial-gradient(circle, rgb(52 211 184 / 55%) 0%, rgb(52 211 184 / 0%) 70%);
+  --ring-line: rgb(52 211 184 / 18%);
+  --ring-glow: radial-gradient(circle, rgb(52 211 184 / 10%), transparent 68%);
+}
+
+/* Theme: light — a warm editorial paper. Same hierarchy, same accent family,
+   deliberately art-directed rather than an inversion of the dark theme. */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces: paper base, slightly lifted panels, white for the top step */
+  --bg: #f6f4ef;
+  --bg-elevated: #fbfaf7;
+  --surface: #ffffff;
+  --header-bg: rgb(246 244 239 / 86%);
+
+  /* Lines: restrained hairlines that stay visible without becoming noisy */
+  --line: rgb(26 28 31 / 10%);
+  --line-strong: rgb(26 28 31 / 22%);
+
+  /* Text: warm near-black for body, muted and subtle kept above AA */
+  --fg: #1a1c1f;
+  --fg-strong: #000000;
+  --fg-muted: #4b5158;
+  --fg-subtle: #5f646b;
+
+  /* Interaction */
+  --hover: rgb(26 28 31 / 5%);
+  --shadow-elevated: 0 18px 40px rgb(26 28 31 / 12%), 0 2px 8px rgb(26 28 31 / 6%);
+
+  /* Accent: the brand teal darkened until it passes AA as text on paper */
+  --accent: #0b7a68;
+  --accent-soft: rgb(11 122 104 / 12%);
+  --accent-fg: #fbfaf7;
+  --accent-2: #2f5fd0;
+
+  /* Decorative effects */
+  --cursor-glow: radial-gradient(circle, rgb(11 122 104 / 26%) 0%, rgb(11 122 104 / 0%) 70%);
+  --ring-line: rgb(11 122 104 / 22%);
+  --ring-glow: radial-gradient(circle, rgb(11 122 104 / 10%), transparent 68%);
 }
 
 @media (min-width: 1600px) {
@@ -118,7 +179,7 @@ button {
 
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-fg);
 }
 
 :focus-visible {
@@ -164,6 +225,17 @@ dd {
 .page-shell {
   min-height: 100vh;
   overflow-x: clip;
+}
+
+/* The custom section navigator is homepage-only, so the native scrollbar is
+   only hidden on pages that actually render it. Case studies keep the native
+   scrollbar (themed through `color-scheme`). */
+html:has(.section-progress) {
+  scrollbar-width: none;
+}
+
+html:has(.section-progress)::-webkit-scrollbar {
+  display: none;
 }
 
 .section-progress {
@@ -263,7 +335,7 @@ dd {
   padding: 0.6rem 0.9rem;
   border-radius: var(--radius-sm);
   background: var(--accent);
-  color: var(--bg);
+  color: var(--accent-fg);
   font-size: var(--text-sm);
   font-weight: 600;
 }
@@ -340,7 +412,7 @@ dd {
 }
 
 .button-primary:hover {
-  background: #ffffff;
+  background: var(--fg-strong);
 }
 
 .button-secondary {
@@ -350,7 +422,7 @@ dd {
 
 .button-secondary:hover {
   border-color: var(--fg-muted);
-  background: rgb(255 255 255 / 4%);
+  background: var(--hover);
 }
 
 .button-small {
@@ -397,6 +469,33 @@ dd {
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--fg);
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.icon-button:hover {
+  border-color: var(--fg-muted);
+  background: var(--hover);
+}
+
+/* Theme toggle: both icons are rendered so the control never depends on
+   client state for its visible state, and hydration stays identical. */
+.theme-toggle-icon {
+  display: none;
+}
+
+.theme-toggle-sun {
+  display: block;
+}
+
+:root[data-theme="light"] .theme-toggle-sun {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle-moon {
+  display: block;
 }
 
 /* Header */
@@ -407,7 +506,7 @@ dd {
   z-index: 40;
   height: var(--header-height);
   border-bottom: 1px solid var(--line);
-  background: rgb(11 12 15 / 82%);
+  background: var(--header-bg);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -474,7 +573,7 @@ dd {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   background: var(--bg-elevated);
-  box-shadow: 0 16px 40px rgb(0 0 0 / 40%);
+  box-shadow: var(--shadow-elevated);
 }
 
 .mobile-nav-panel:not([hidden]) {
@@ -493,7 +592,7 @@ dd {
 }
 
 .mobile-nav-panel a:hover {
-  background: rgb(255 255 255 / 5%);
+  background: var(--hover);
   color: var(--fg);
 }
 
@@ -522,9 +621,9 @@ dd {
   right: clamp(1rem, 10vw, 8rem);
   width: clamp(10rem, 24vw, 18rem);
   aspect-ratio: 1;
-  border: 1px solid rgb(52 211 184 / 18%);
+  border: 1px solid var(--ring-line);
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(52 211 184 / 10%), transparent 68%);
+  background: var(--ring-glow);
   opacity: 0.8;
   pointer-events: none;
   will-change: transform;
@@ -1041,8 +1140,16 @@ dd {
   padding-block: clamp(2rem, 6vw, 5rem);
 }
 
-.work-back {
+.work-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+.work-back {
+  margin: 0;
 }
 
 .work-header {
@@ -1286,7 +1393,7 @@ dd {
   width: 40px;
   height: 40px;
   margin: -20px 0 0 -20px;
-  background: radial-gradient(circle, rgb(52 211 184 / 55%) 0%, rgb(52 211 184 / 0%) 70%);
+  background: var(--cursor-glow);
 }
 
 .cursor-dot {
@@ -1352,6 +1459,20 @@ dd {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Theme switching
+   -------------------------------------------------------------------------
+   Colours cross-fade for ~200ms so a theme change reads as a controlled
+   transition rather than a hard snap. The attribute is only present while the
+   switch is in flight, so nothing is permanently animating and reveal/parallax
+   transitions keep their own behaviour. Elements already animating on reveal
+   are excluded so an in-flight reveal is never interrupted. */
+
+html[data-theme-switching] *:not([data-reveal]):not(.cursor-blob):not(.cursor-dot) {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: var(--theme-duration);
+  transition-timing-function: var(--ease);
 }
 
 /* Responsive */
@@ -1513,5 +1634,9 @@ dd {
   .hero-parallax {
     transform: none !important;
     will-change: auto;
+  }
+
+  html[data-theme-switching] *:not([data-reveal]):not(.cursor-blob):not(.cursor-dot) {
+    transition: none;
   }
 }
