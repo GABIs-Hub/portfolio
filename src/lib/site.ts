@@ -139,6 +139,10 @@ export const projects: Project[] = [
       "Error decoder translates stack traces into plain-English explanations and suggested fixes.",
       "Implemented as a Node.js API.",
     ],
+    impact: [
+      "Establishes a unified parsing interface across npm, Dart, and Android dependency trees.",
+      "Translates complex runtime stack traces into actionable debugging guidance.",
+    ],
     stack: ["Node.js", "REST API"],
     status: "In progress",
   },

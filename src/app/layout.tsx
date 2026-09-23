@@ -6,6 +6,8 @@ import { IntroSplash } from "@/components/intro-splash";
 import { RevealObserver } from "@/components/reveal-observer";
 import { siteConfig } from "@/lib/site";
 import { DEFAULT_THEME, THEME_COLORS, themeInitScript } from "@/lib/theme";
+// CSS is handled by Next.js at build time; TypeScript has no module declaration for it.
+// @ts-expect-error -- intentional side-effect import of a Next.js global stylesheet
 import "./globals.css";
 
 const quickSand = Quicksand({
