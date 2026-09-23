@@ -102,12 +102,16 @@ export default async function WorkPage({ params }: WorkPageProps) {
             </section>
 
             <section aria-labelledby="work-impact">
-              <h2 id="work-impact">Evidence and impact</h2>
-              <ul>
-                {project.impact.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              {project.impact && project.impact.length > 0 && (
+                <>
+                  <h2 id="work-impact">Evidence and impact</h2>
+                  <ul>
+                    {project.impact.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </section>
           </div>
 
