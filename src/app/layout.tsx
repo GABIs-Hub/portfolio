@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Overpass, Quicksand } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { CursorBlob } from "@/components/cursor-blob";
 import { IntroSplash } from "@/components/intro-splash";
@@ -141,6 +142,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {children}
         <CursorBlob />
         <RevealObserver />
+        <SpeedInsights />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
