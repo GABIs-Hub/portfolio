@@ -134,6 +134,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             before any content is painted. `next/script` would queue it for the
             framework bundle and reintroduce a flash of the wrong theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try { if (sessionStorage.getItem('gabi-intro-seen')) document.documentElement.dataset.introSeen = 'true'; } catch {}",
+          }}
+        />
         <a className="skip-link" href="#main">
           Skip to content
         </a>
